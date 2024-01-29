@@ -1,0 +1,63 @@
+{% extends "panel/panel.base.html" %}
+
+{% block content %}
+<style>
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .light-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .light-table th, .light-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .light-table th {
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    .light-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+<!-- List of reservations with option to edit status. -->
+<div class="table-responsive">
+    <table class="light-table">
+        <caption>
+            Class reservations list
+        </caption>
+        <thead>
+            <tr>
+                <th>Class Space</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Contact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.class_space }}</td>
+                    <td>{{ reservation.date }}</td>
+                    <td>{{ reservation.status }}</td>
+                    <td>{{ reservation.email }} - {{ reservation.phone_number}}</td>
+                    <td>
+                        <a href="{% url 'panel:edit_reservation' reservation.id %}" class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,367 @@
+{% load static %}
+<!-- TODO: Center all cards and standarize their size to become full almost full screen -->
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- For proper mobile responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="styles.internal.css" rel="stylesheet">
+ 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/brands.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/regular.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/solid.min.css" />
+  <style>
+    body {
+      margin-top: 60px;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      background-color: rgb(245, 245, 245, 0.5);
+    }
+
+
+    .bg-pink {
+      border-color: aqua;
+      color: white;
+      background-color: rgba(255, 0, 126, 100);
+    }
+
+    .navbar {
+      background-color: white;
+      flex-shrink: 0;
+
+      /* Esto asegura que la barra de navegación siempre esté en la parte superior */
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-link {
+      color: white;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    .navbar-nav .active>.nav-link,
+    .navbar-nav .nav-link.active,
+    .navbar-nav .nav-link.show,
+    .navbar-nav .show>.nav-link {
+      color: white;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+      color:white;
+    }
+
+
+    .container {
+      display: flex;
+    }
+
+    .sidebar {
+      flex: 0 0 200px;
+      /* Esto establece el ancho de la barra lateral */
+      padding: 20px;
+      border-right: 1px solid white;
+      /* Esto agrega una línea entre la barra lateral y el contenido */
+    }
+
+    .content {
+      flex-grow: 1;
+      /* Esto hace que el contenido ocupe el espacio restante */
+      padding: 20px;
+    }
+
+    /* Estilo para el contenedor principal */
+    #content {
+      display: flex;
+      justify-content: center;
+      /* Centra horizontalmente */
+      align-items: center;
+      /* Centra verticalmente */
+      height: 100vh;
+      /* O ajusta según sea necesario */
+    }
+
+    .card {
+      background-color: rgb(255, 255, 255);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100%;
+      border-color: transparent;
+      /* Asegúrate de que .card tenga una altura definida */
+
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      /* Ajusta este valor al tamaño de relleno que desees */
+      height: 100%;
+      /* Asegúrate de que .card-body tenga una altura definida */
+    }
+
+    .card-img-top {
+      max-width: 33.33%;
+      /* Limita el ancho máximo al 33.33% del ancho de la tarjeta */
+      height: auto;
+      /* Mantiene la relación de aspecto de la imagen */
+      display: block;
+      /* Asegura que la imagen se muestre como un bloque */
+      margin: 0 auto;
+      /* Centra la imagen horizontalmente */
+    }
+
+    .reservationButton {
+      background-color: rgb(255, 0, 126);
+      color: antiquewhite;
+    }
+
+    .nav-link{
+        text-decoration: none;
+        position: relative;
+        color: #000; /* Cambia el color del texto según tus necesidades */
+       /*  transition: color 0.3s; Efecto de transición de color al pasar el ratón */
+    }
+
+    .nav-link::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background-color: pink; /* Color de la barra debajo del enlace */
+        position: absolute;
+        bottom: -4px; /* Ajusta la posición vertical de la barra según tus necesidades */
+        left: 50%;
+          /* transition: width 0.3s, left 0.3s;Efecto de transición al pasar el ratón */
+    }
+
+    .nav-link:hover {
+        color:  pink; /* Cambia el color del texto al pasar el ratón */
+    }
+    .nav-link:hover::after {
+        width: 100%;
+        left: 0;
+    }
+    .submit-buttom{
+     background-color: pink;
+     border: 1px solid pink;
+     color: white;
+     font-weight: bold;
+    width: 200px;
+    height: 40px;
+    margin: 20px auto;
+    }
+    .input_login{
+      border: none;
+        border-bottom: 1px solid #000; /* Barra negra por defecto */
+        margin: 0 auto;
+        margin-top: 20px;
+        height: 40px;
+        transition: border-color 0.3s, height 0.3s; /* Efecto de transición */
+      width: 300px;
+      outline: none;
+    
+    }
+
+    .input_login:hover {
+        
+        border-color: #333; /* Barra más oscura */
+        height: 45px; /* Altura aumentada */
+    }
+    .midle_title{
+      margin: 0 auto;
+      font-weight: 800;
+    }
+   /* Agrega estas reglas a tu hoja de estilo CSS */
+#services {
+    text-align: center;
+}
+
+.public_city_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 40px 0;
+   
+}
+
+.public_city {
+    text-decoration: none;
+    font-size: 20px;
+    color: inherit;
+    font-family: wfont_a9c70e_7699085fac7f4e67b301131bebf3336f,wf_7699085fac7f4e67, Arial, Helvetica, sans-serif;
+    background-color: white;
+    padding: 10px 60px;
+    
+}
+
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.card {
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+}
+
+  </style>
+  <!-- <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script> -->
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg ">
+      <div class="container-fluid ">
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarText" >
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text" style="margin: auto;">
+            <li class="nav-item" style="padding: 0 15px; margin-top: 10px ;">
+              <a class="" a href="#welcome" style="color: black; font-weight: bolder;">Project Brand</a>
+            </li>
+            <li class="nav-item" style="padding: 0 15px;">
+              <a class="nav-link active" aria-current="page" href="#welcome" style="color: black;">Home</a>
+            </li>
+            <li class="nav-item" style="padding: 0 15px;">
+              <a class="nav-link" href="#services" style="color: black;">Services</a>
+            </li>
+            <li class="nav-item" style="padding: 0 15px;"> 
+              <a class="nav-link" href="#schedule" style="color: black;">Schedule a class</a>
+            </li>
+            <li class="nav-item" style="padding: 0 15px;">
+              <a class="nav-link" href="#contact" style="color: black; ">Contact</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item" style="padding: 0 15px;">
+              <a class="nav-link" > <i class=" fa fa-solid fa-circle-user" style="color: pink; font-size: 25px;"></i> <span style="color: pink; margin-bottom: 10px;">{{user}}</span></a>
+            </li>
+            {% else %}
+
+            <li class="nav-item" style="padding: 0 15px;">
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal" > <i class=" fa fa-solid fa-circle-user" style="color: pink; font-size: 25px;"></i> <span style="color: pink; margin-bottom: 10px;">Registrate</span></a>
+            </li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  
+<section id="modalSection">
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <div class="modal-dialog">
+          <div class="modal-content" style="width: 2wh;">
+              <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <h5 class=""  style="margin-top: 20px; margin-left: auto; margin-right: auto; font-size: 50px; flex-wrap: wrap; font-weight: bold;" >Registro</h5>
+              <form action="{%url 'register'%}" method="post" style="display: flex; flex-direction: column; ">
+                {% csrf_token %}
+                <input class="input_login" type="text" id="usernmae" name="username" required  placeholder="Username" style="margin-top: 20px;  height: 40px;"> 
+                <input class="input_login" type="text" id="nombre" name="nombre" required  placeholder="Nombre" style="margin-top: 20px;  height: 40px;"> 
+                <input  class="input_login" type="text" id="apellido" name="apellido" required placeholder="Apellido" style="margin-top: 20px;   height: 40px;">
+                <input  class="input_login" type="email" id="email" name="email" required placeholder="Email" style="margin-top: 20px;   height: 40px;">
+                <input  class="input_login" type="password" id="password" name="password" required placeholder="Contraeña" style="margin-top: 20px;   height: 40px;">
+                <p style="margin: 20px auto;">¿Ya tienes una cuenta? <a id="openLoginModal" style="color:pink; cursor: pointer;">Ingresa</a></p>
+
+                <button type="submit" class="submit-buttom">Enviar</button>
+            </form>
+
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <h5 class="modal-title" id="exampleModalLabel">Ingresar</h5>
+            <!-- Contenido del segundo modal -->
+            <form action="/login" method="post">
+              <div class="container">
+                <h2>Login</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+                </form>
+            </div> 
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+
+{%block content%}
+
+{%endblock%}
+
+
+</body>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+  integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+  crossorigin="anonymous"></script>
+
+<!-- Add this script to your HTML file -->
+<script>
+$(document).ready(function () {
+    // Trigger the opening of the second modal with ID "loginModal"
+    $("#openLoginModal").click(function () {
+        $("#myModal").modal("hide"); // Close the first modal if needed
+        $("#loginModal").modal("show"); // Show the second modal
+    });
+});
+</script>
+</html>

@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+{% load static %}
+
+<style>
+    .round-btn {
+      border-radius: 50%; /* Hace que el botón sea redondo */
+      width: 50px; /* Ajusta el ancho del botón según sea necesario */
+      height: 50px; /* Ajusta la altura del botón según sea necesario */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: black; /* Color de fondo negro */
+      color: white; /* Color de texto blanco */
+      text-decoration: none; /* Quita la decoración de texto predeterminada */
+    }
+
+    .round-btn i {
+      transform: translateX(2px); /* Ajusta la posición de la flecha */
+    }
+  </style>
+{% block content %}
+  <div class="container mt-5" style="display: flex; flex-direction: column;" >
+    <h2>Recetas</h2>
+
+    <div class="row">
+      <!-- Tarjeta de Receta 1 -->
+      <div class="col-md-4 mb-4" >
+        <div class="card">
+          <img src="https://static.wixstatic.com/media/3b9bbb_0da431b7f8574f2ba3fc7f834599123e~mv2.png/v1/fill/w_302,h_452,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/3b9bbb_0da431b7f8574f2ba3fc7f834599123e~mv2.png"   style="width: 302px; height: 180px; object-fit: cover;" alt="Receta 1">
+          <div class="" style="">
+            <h5  style="font-weight: bold;">Título de la Receta 1</h5>
+            <p class="card-text">
+                Strawberry Red Punch and Potato Salad
+                By Chef Chakayla Taylor 🍓 Sip and Savor! 🥔 Freshen up your summer with our tantalizing Strawberry Red Punch and creamy Potato Salad. Bursting with flavor and goodness, this dynamic duo will leave your taste buds dancing all season long!</p>
+                <i class="fas fa-arrow-right"></i> <!-- Agrega el icono de la flecha -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Receta 2 -->
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="https://static.wixstatic.com/media/b8cbe3_ae0ee2ad55ca44d893804334c6af0592~mv2.png/v1/fill/w_302,h_452,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/b8cbe3_ae0ee2ad55ca44d893804334c6af0592~mv2.png"alt="Receta 2">
+          <div class="card-body">
+            <h5 class="card-title">Título de la Receta 2</h5>
+            <p class="card-text">Descripción de la Receta 2.</p>
+            <a href="#" class="btn btn-primary">Ver Detalles</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agrega más tarjetas según sea necesario -->
+
+    </div>
+  </div>
+{% endblock %}

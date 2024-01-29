@@ -1,0 +1,25 @@
+{% extends "panel/panel.base.html" %}
+
+{% block content %}
+<div class="w-full max-w-xs mx-auto mt-5">
+    <h1 class="text-xl font-semibold text-gray-700">Services</h1>
+    <a href="{% url 'panel:add_service' %}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Add Service</a>    <ul class="divide-y divide-gray-200">
+        {% for service in services %}
+            <li class="py-4">
+                <div class="flex space-x-3">
+                    <img class="h-20 w-20 object-cover rounded" src="{{ service.picture.url }}" alt="{{ service.name }}">
+                    <div class="flex-1 space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-sm font-medium">{{ service.name }}</h3>
+                            <p class="text-sm text-gray-500">{{ service.price }}</p>
+                        </div>
+                        <p class="text-sm text-gray-500">{{ service.details }}</p>
+                        <p class="text-sm text-gray-500">Location: {{ service.location }}</p>
+                        <a href="{% url 'panel:edit_service' service.id %}" class="text-sm text-blue-500">Edit</a>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,252 @@
+{% load static %}
+<!-- TODO: Center all cards and standarize their size to become full almost full screen -->
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- For proper mobile responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="styles.internal.css" rel="stylesheet">
+  <style>
+    /* TODO: Move to static files (CDN - W3)
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 10px;
+  }
+  
+  .item {
+    grid-column: span 2;
+  }
+  
+
+.bg-pink {
+  border-color: aqua;
+  color: white;
+  background-color: rgb(255,0,126);
+}
+
+.bg-pink .text{
+  border-color: aqua;
+  color: white;
+  background-color: rgb(255,0,126);
+}
+
+
+#navbarText{
+  color: white;
+}
+
+.navbar-brand{
+  color: white;
+} */
+
+    body {
+      margin-top: 60px;
+      /* Ajusta este valor al tamaño de tu barra de navegación */
+    }
+
+    .bg-pink {
+      border-color: aqua;
+      color: white;
+      background-color: rgba(255, 0, 126, 100);
+    }
+
+    .navbar {
+      background-color: rgb(255, 0, 126);
+      flex-shrink: 0;
+
+      /* Esto asegura que la barra de navegación siempre esté en la parte superior */
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-link {
+      color: white;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    .navbar-nav .active>.nav-link,
+    .navbar-nav .nav-link.active,
+    .navbar-nav .nav-link.show,
+    .navbar-nav .show>.nav-link {
+      color: white;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+
+    .container {
+      display: flex;
+    }
+
+    .sidebar {
+      flex: 0 0 200px;
+      /* Esto establece el ancho de la barra lateral */
+      padding: 20px;
+      border-right: 1px solid #ddd;
+      /* Esto agrega una línea entre la barra lateral y el contenido */
+    }
+
+    .content {
+      flex-grow: 1;
+      /* Esto hace que el contenido ocupe el espacio restante */
+      padding: 20px;
+    }
+
+    /* Estilo para el contenedor principal */
+    #content {
+      display: flex;
+      justify-content: center;
+      /* Centra horizontalmente */
+      align-items: center;
+      /* Centra verticalmente */
+      height: 100vh;
+      /* O ajusta según sea necesario */
+    }
+
+    .card {
+      background-color: rgb(255, 255, 255);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100%;
+      border-color: transparent;
+      /* Asegúrate de que .card tenga una altura definida */
+
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      /* Ajusta este valor al tamaño de relleno que desees */
+      height: 100%;
+      /* Asegúrate de que .card-body tenga una altura definida */
+    }
+
+    .card-img-top {
+      max-width: 33.33%;
+      /* Limita el ancho máximo al 33.33% del ancho de la tarjeta */
+      height: auto;
+      /* Mantiene la relación de aspecto de la imagen */
+      display: block;
+      /* Asegura que la imagen se muestre como un bloque */
+      margin: 0 auto;
+      /* Centra la imagen horizontalmente */
+    }
+
+    .reservationButton {
+      background-color: rgb(255, 0, 126);
+      color: antiquewhite;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container mt-5">
+    <div class="w-full max-w-xs mx-auto mt-5">
+      <form method="post" action="{% url 'reservation' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required
+            value="{{form.name.value|default:''}}">
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required
+            value="{{form.email.value|default:''}}">
+        </div>
+        <div class="form-group">
+          <label for="phone_number">Phone Number</label>
+          <input type="tel" class="form-control" id="phone_number" name="phone_number"
+            placeholder="Enter your phone number" required value="{{form.phone_number.value|default:''}}">
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="class_space">Space</label>
+          <select class="form-control" id="class_space" name="class_space" required>
+            {% for space in spaces %}
+            <option value="{{ space.id }}">{{ space.day }} -- {{space.start_time}} - {{space.end_time}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="service">Class service</label>
+          <select class="form-control" id="service" name="service" required>
+            {% for service in services %}
+            <option value="{{ service.id }}" data-cost="{{ service.price }}">{{ service.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="tickets">Ticket amount</label>
+          <input type="number" class="form-control" id="tickets" name="tickets" min="1" placeholder="Enter the number of tickets" required>
+        </div>
+        <hr>
+        <div id="costSection" style="display: none;">
+          <h5>Cost: $<span id="cost"></span> USD</h5>
+        </div>
+        <hr>
+
+        <button type="submit" class="btn btn-primary">Confirm</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    var serviceSelect = document.getElementById('service');
+    var ticketsInput = document.getElementById('tickets');
+    var costElement = document.getElementById('cost');
+    var costSection = document.getElementById('costSection');
+
+    function updateCost() {
+      var selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+      var serviceCost = Number(selectedOption.getAttribute('data-cost'));
+      var ticketAmount = Number(ticketsInput.value);
+      var totalCost = serviceCost * ticketAmount;
+      costElement.textContent = totalCost.toFixed(2);
+      costSection.style.display = 'block';
+    }
+
+    serviceSelect.addEventListener('change', updateCost);
+    ticketsInput.addEventListener('change', updateCost);
+
+    // Call updateCost once at the start to show the initial cost
+    updateCost();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

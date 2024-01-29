@@ -1,0 +1,44 @@
+{% extends "panel/panel.base.html" %}
+
+{% block content %}
+<div>
+  <div class="next-scheduled-classes">
+    
+  </div>
+  <div class="class-spaces">
+    <!-- Button to add a new class space -->
+    <button class="add-space main-color hover:secundary-color text-white font-bold py-2 px-4 rounded-full" onclick="location.href='{% url 'panel:add_class_space' %}'">Add class space</button>    
+    <!-- List of already defined classes -->
+    <!-- Show a list separated by weekday -->
+    <ul>
+      {% for day, class_spaces in class_spaces_by_day.items %}
+        <li class="day mb-4">
+          <h2 class="text-xl font-bold mb-2">{{ day }}</h2>
+          <ul>
+            {% for class_space in class_spaces %}
+              <li class="shadow rounded-lg p-4 mb-2 {% if class_space.space_type == 'OFFLINE' %}bg-gray-300{% else %}bg-white{% endif %}">
+                <p>Type: <span class="font-semibold">{{ class_space.space_type }}</span></p>
+                <p>Start Time: <span class="font-semibold">{{ class_space.start_time }}</span></p>
+                <p>End Time: <span class="font-semibold">{{ class_space.end_time }}</span></p>
+                <a href="{% url 'panel:edit_class_space' class_space.id %}" class="text-blue-500">Edit</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="past-class-spaces">
+    <h2 class="text-xl font-bold mb-2">Past class spaces</h2>
+    <ul>
+      {% for class_space in past_class_spaces %}
+        <li class="bg-white shadow rounded-lg p-4 mb-2">
+          <p>Type: <span class="font-semibold">{{ class_space.space_type }}</span></p>
+          <p>Start Time: <span class="font-semibold">{{ class_space.start_time }}</span></p>
+          <p>End Time: <span class="font-semibold">{{ class_space.end_time }}</span></p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

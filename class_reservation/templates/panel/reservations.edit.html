@@ -1,0 +1,54 @@
+{% extends "panel/panel.base.html" %}
+
+{% block content %}
+<div class="w-full max-w-md mx-auto mt-5">
+    <h1 class="text-2xl font-semibold text-gray-700 mb-4">Edit Reservation</h1>
+    <form method="POST" action="{% url 'panel:edit_reservation' reservation.id %}" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="class_space" class="block text-sm font-medium text-gray-700">Class Space:</label>
+            <input type="text" id="class_space" name="class_space" value="{{ reservation.class_space }}" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md">
+        </div>
+        <div class="form-group">
+            <label for="day" class="block text-sm font-medium text-gray-700">Date:</label>
+            <input type="date" id="day" name="day" value="{{ reservation.class_space.day | date:'Y-m-d' }}" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md">
+        </div>
+        <div class="form-group">
+            <label for="status" class="block text-sm font-medium text-gray-700">Status:</label>
+            <select id="status" name="status" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md" onchange="changeOptionColor(this)">
+                <option value="pending" {% if reservation.status == 'pending' %}selected{% endif %}>Pending</option>
+                <option value="confirmed" {% if reservation.status == 'confirmed' %}selected{% endif %}>Confirmed</option>
+                <option value="cancelled" {% if reservation.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+            <input readonly type="email" id="email" name="email" value="{{ reservation.email }}" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md">
+        </div>
+        <div class="form-group">
+            <label for="phone" class="block text-sm font-medium text-gray-700">Phone:</label>
+            <input readonly type="tel" id="phone_number" name="phone_number" value="{{ reservation.phone_number }}" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md">
+        </div>
+        <button type="submit" class="btn btn-primary mt-4 py-2 px-4 rounded-md bg-blue-500 text-white">Save Changes</button>
+    </form>
+</div>
+<script>
+    function changeOptionColor(selectElement) {
+        var index = selectElement.selectedIndex;
+        var optionElement = selectElement.options[index];
+        var value = optionElement.value;
+    
+        switch(value) {
+            case 'pending':
+                optionElement.style.backgroundColor = 'yellow';
+                break;
+            case 'confirmed':
+                optionElement.style.backgroundColor = 'green';
+                break;
+            case 'cancelled':
+                optionElement.style.backgroundColor = 'red';
+                break;
+        }
+    }
+    </script>
+{% endblock %}

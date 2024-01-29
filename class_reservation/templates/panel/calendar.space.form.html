@@ -1,0 +1,74 @@
+{% extends "panel/panel.base.html" %}
+
+{% block content %}
+<style>
+  .errorlist {
+    color: #b91c1c;
+    background-color: #fee2e2;
+    border-radius: .375rem;
+    padding: .5rem;
+    margin-top: .5rem;
+  }
+</style>
+<div class="w-full max-w-xs mx-auto mt-5">
+  <form id="space-form" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="space_type">
+        Class Space Type
+      </label>
+      {{ form.space_type }}
+      {% if form.space_type.errors %}
+      <p class="text-red-500 text-xs italic">{{ form.space_type.errors }}</p>
+      {% endif %}
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="day">
+        Day
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="day" name="day" type="date" value="{{ form.day.value|default:'' }}">
+      {% if form.day.errors %}
+      <p class="text-red-500 text-xs italic">{{ form.day.errors }}</p>
+      {% endif %}
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" id="start_time" for="start_time">
+        Start Time
+      </label>
+      {{ form.start_time }}
+      {% if form.start_time.errors %}
+      <p class="text-red-500 text-xs italic">{{ form.start_time.errors }}</p>
+      {% endif %}
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" id="end_time" for="end_time">
+        End Time
+      </label>
+      {{ form.end_time }}
+      {% if form.end_time.errors %}
+      <p class="text-red-500 text-xs italic">{{ form.end_time.errors }}</p>
+      {% endif %}
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit">
+        Add class space
+      </button>
+    </div>
+  </form>
+</div>
+<script>
+  document.getElementById('space-form').addEventListener('submit', function (event) {
+    var startTime = document.getElementById('start_time').value;
+    var endTime = document.getElementById('end_time').value;
+
+    if (startTime >= endTime) {
+      alert('End time must be greater than start time');
+      event.preventDefault();
+    }
+  });
+</script>
+{% endblock %}

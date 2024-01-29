@@ -1,0 +1,70 @@
+{% extends "panel/panel.base.html" %}
+
+{% block content %}
+<style>
+  .errorlist {
+      color: #b91c1c;
+      background-color: #fee2e2;
+      border-radius: .375rem;
+      padding: .5rem;
+      margin-top: .5rem;
+  }
+  </style>
+<div class="w-full max-w-xs mx-auto mt-5">
+  <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                Service Name
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Service Name" name="name" value="{{ form.name.value|default:'' }}">
+            {% if form.name.errors %}
+                <div class="errorlist">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+            Service Description
+          </label>
+          <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" placeholder="Service Description" name="description">{{ form.description.value|default:'' }}</textarea>
+          {% if form.description.errors %}
+                <div class="errorlist">{{ form.description.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+            Service Price
+          </label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="number" placeholder="Service Price" name="price" value="{{ form.price.value|default:'' }}">
+          USD
+          {% if form.price.errors %}
+                <div class="errorlist">{{ form.price.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="location">
+            Location
+          </label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Service location" name="location" value="{{ form.location.value|default:'' }}">
+
+          {% if form.location.errors %}
+                <div class="errorlist">{{ form.location.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="service_picture">
+            Service Picture
+          </label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="picture" type="file" name="picture">
+          {% if form.picture.errors %}
+            <div class="errorlist">{{ form.picture.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="flex items-center justify-between">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Add Service
+          </button>
+        </div>
+      </form>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "panel/panel.base.html" %}
+
+{% block content %}
+<style>
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .light-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .light-table th, .light-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .light-table th {
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    .light-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+<div class="table-responsive">
+    <!-- List of payments -->
+    <table class="light-table">
+        <caption>
+            Payments list
+        </caption>
+        <thead>
+            <tr>
+                <th>Reservation</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.reservation }}</td>
+                    <td>{{ payment.amount }}</td>
+                    <td>{{ payment.date }}</td>
+                    <td>{{ payment.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

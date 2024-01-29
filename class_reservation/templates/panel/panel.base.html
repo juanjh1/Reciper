@@ -1,0 +1,179 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'panel/panel.js' %}"></script>
+    <style>
+        /* Additional styles if needed */
+
+        .sidebar {
+            width: 200px;
+            /* Esto establece el ancho de la barra lateral */
+            transition: width 0.5s;
+            /* Esto agrega una transición suave cuando cambia el ancho */
+            height: 100%;
+            /* Esto hace que la barra lateral tenga la altura completa de la página */
+
+        }
+
+        .hamburger {
+            display: none;
+            /* Esto oculta el botón de hamburguesa por defecto */
+
+            position: fixed;
+            top: 10px;
+            /* Esto coloca el botón a 10px del borde superior */
+            left: 10px;
+            /* Esto coloca el botón a 10px del borde izquierdo */
+            z-index: 100;
+            /* Esto asegura que el botón esté por encima de otros elementos */
+        }
+
+        /* Esto oculta la barra lateral y muestra el botón de hamburguesa en pantallas de menos de 600px de ancho */
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        .active {
+            background-color: #f00;
+            /* Cambia esto al color que desees */
+        }
+
+        .main-color {
+            background-color: rgb(255, 0, 126);
+        }
+
+        .secundary-color {
+            background-color: rgb(255, 183, 205);
+        }
+    </style>
+    <style>
+        .weekdays {
+            list-style: none;
+            padding: 0;
+        }
+
+        .day {
+            border-bottom: 1px solid #ccc;
+            /* This adds a line below each day */
+            padding: 20px 0;
+            /* This keeps constant space for each day */
+        }
+    </style>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <button class="hamburger" onclick="toggleSidebar()">
+        <div class="space-y-2">
+            <span class="block w-8 h-0.5 bg-gray-600"></span>
+            <span class="block w-8 h-0.5 bg-gray-600"></span>
+            <span class="block w-5 h-0.5 bg-gray-600"></span>
+        </div>
+    </button>
+    <div class="min-h-screen flex">
+        <!-- Sidebar -->
+        <div class="sidebar w-64 bg-white shadow-md">
+            <div class="px-6 py-4">
+                <h1 class="text-xl font-semibold text-gray-700">Panel</h1>
+            </div>
+            <nav class="mt-2">
+                <a href="{% url 'panel:calendar' %}" class="nav-link block px-6 py-2 hover:bg-gray-100">
+                    Calendar
+                </a>
+                <a href="{% url 'panel:reservations' %}" class="nav-link block px-6 py-2 hover:bg-gray-100">
+                    Reservations
+                </a>
+                <a href="{% url 'panel:payments' %}" class="nav-link block px-6 py-2 hover:bg-gray-100">
+                    Payments
+                </a>
+                <a href="{% url 'panel:services' %}" class="nav-link block px-6 py-2 hover:bg-gray-100">
+                    Services
+                </a>
+            </nav>
+            <div class="username-section absolute bottom-0 inset-x-0 p-6 dropdown">
+                <a href="#" class="flex items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.121 11.121a1.5 1.5 0 011.415 0l2.13 2.13a1.5 1.5 0 002.121 0l2.13-2.13a1.5 1.5 0 012.121 0l2.13 2.13a1.5 1.5 0 010 2.121L12 21.121l-6.364-6.364a1.5 1.5 0 010-2.121z" />
+                        </svg>
+                    </span>
+                    <span class="ml-3 text-gray-700">Username</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <div class="h-full border-2 border-gray-300 rounded-lg p-6">
+                <!-- Content goes here -->
+                <!-- TODO: Implement an adaptable content interface based from context here -->
+                {% block content %}
+                {% endblock%}
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            var path = window.location.pathname;
+            var page = path.split("/").pop();
+            var sidebarLinks = document.querySelectorAll('.sidebar a');
+
+            sidebarLinks.forEach(function (link) {
+                var linkPage = link.getAttribute('href').split("/").pop();
+                if (linkPage === page) {
+                    link.classList.add('main-color', 'text-white');
+                }
+            });
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

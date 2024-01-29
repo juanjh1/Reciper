@@ -1,0 +1,134 @@
+/* TODO: Move to static files (CDN - W3)
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 10px;
+  }
+  
+  .item {
+    grid-column: span 2;
+  }
+  
+
+.bg-pink {
+  border-color: aqua;
+  color: white;
+  background-color: rgb(255,0,126);
+}
+
+.bg-pink .text{
+  border-color: aqua;
+  color: white;
+  background-color: rgb(255,0,126);
+}
+
+
+#navbarText{
+  color: white;
+}
+
+.navbar-brand{
+  color: white;
+} */
+
+body {
+  margin-top: 60px; /* Ajusta este valor al tamaño de tu barra de navegación */
+}
+
+.bg-pink {
+  border-color: aqua;
+  color: white;
+  background-color: rgba(255,0,126, 100);
+}
+
+.navbar {
+  background-color: rgb(255,0,126);
+  flex-shrink: 0; 
+
+  /* Esto asegura que la barra de navegación siempre esté en la parte superior */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100; 
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: white;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-nav .active > .nav-link,
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show,
+.navbar-nav .show > .nav-link {
+  color: white;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  flex: 0 0 200px; /* Esto establece el ancho de la barra lateral */
+  padding: 20px;
+  border-right: 1px solid #ddd; /* Esto agrega una línea entre la barra lateral y el contenido */
+}
+
+.content {
+  flex-grow: 1; /* Esto hace que el contenido ocupe el espacio restante */
+  padding: 20px;
+}
+
+/* Estilo para el contenedor principal */
+#content {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* O ajusta según sea necesario */
+}
+
+.card {
+  background-color: rgb(250, 250, 250);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%; /* Asegúrate de que .card tenga una altura definida */
+
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Ajusta este valor al tamaño de relleno que desees */
+  height: 100%; /* Asegúrate de que .card-body tenga una altura definida */
+}
+
+.card-img-top {
+  max-width: 33.33%; /* Limita el ancho máximo al 33.33% del ancho de la tarjeta */
+  height: auto; /* Mantiene la relación de aspecto de la imagen */
+  display: block; /* Asegura que la imagen se muestre como un bloque */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+.reservationButton {
+  background-color: rgb(255,0,126);
+  color: antiquewhite;
+}

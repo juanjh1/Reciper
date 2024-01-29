@@ -1,0 +1,359 @@
+
+{% extends "index.html" %}
+{% load static %}
+
+
+<style>
+  .card-container {
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .card {
+      position: relative;
+      overflow: hidden;
+      margin: 10px;
+      width: 250px;
+      transition: transform 0.3s;
+  }
+
+  .card:hover {
+      transform: translateY(-50%);
+  }
+
+  .card img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s;
+  }
+
+  .card:hover img {
+      transform: translateY(-100%);
+  }
+
+  .card .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      opacity: 1;
+      transition: opacity 0.3s;
+  }
+
+  .card:hover .overlay {
+      opacity: 0;
+  }
+
+  .card-body {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      transition: transform 0.3s;
+  }
+
+  .card:hover .card-body {
+      transform: translateY(-100%);
+  }
+
+  .communication-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .communication-button a {
+            display: flex;
+            align-items: center;
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .communication-button img {
+            width: 30px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .pink-section {
+      background-color: pink;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      color: white;
+    }
+
+    .promo-text {
+      color: white;
+      margin-top: 20px;
+    }
+
+    .white-section {
+      background-color: #fff;
+      display: flex;
+      width: 80%;
+      margin: auto;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-top: 20px;
+    }
+
+    .white-section img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .white-section button {
+      color: pink;
+      background-color: #fff;
+      border: 2px solid pink;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .white-section button:hover {
+      background-color: pink;
+      color: #fff;
+    }
+</style>
+{%block content%}
+
+
+
+
+<section id="modalSection">
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <div class="modal-dialog">
+          <div class="modal-content" style="width: 2wh;">
+              <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <h5 class=""  style="margin-top: 20px; margin-left: auto; margin-right: auto; font-size: 50px; flex-wrap: wrap; font-weight: bold;" >Registro</h5>
+              <form action="{%url 'register'%}" method="post" style="display: flex; flex-direction: column; ">
+                {% csrf_token %}
+                <input class="input_login" type="text" id="usernmae" name="username" required  placeholder="Username" style="margin-top: 20px;  height: 40px;"> 
+                <input class="input_login" type="text" id="nombre" name="nombre" required  placeholder="Nombre" style="margin-top: 20px;  height: 40px;"> 
+                <input  class="input_login" type="text" id="apellido" name="apellido" required placeholder="Apellido" style="margin-top: 20px;   height: 40px;">
+                <input  class="input_login" type="email" id="email" name="email" required placeholder="Email" style="margin-top: 20px;   height: 40px;">
+                <input  class="input_login" type="password" id="password" name="password" required placeholder="Contraeña" style="margin-top: 20px;   height: 40px;">
+                <p style="margin: 20px auto;">¿Ya tienes una cuenta? <a id="openLoginModal" style="color:pink; cursor: pointer;">Ingresa</a></p>
+
+                <button type="submit" class="submit-buttom">Enviar</button>
+            </form>
+
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <h5 class="modal-title" id="exampleModalLabel">Ingresar</h5>
+            <!-- Contenido del segundo modal -->
+            <form action="/login" method="post">
+              <div class="container">
+                <h2>Login</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+                </form>
+            </div> 
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+  <div class="content container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <section id="welcome" href="#welcome">
+          <div id="carouselWelcome" class="carousel slide" data-bs-ride="carousel-welcome">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="card min-vh-100 min-vw-50">
+                  <div class="card-body">
+                    <div class="media img text-center m-4">
+                      <img
+                        src="https://plus.unsplash.com/premium_photo-1661281229469-d23ef2197d6e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        class="card-img-top" alt="Card Image">
+                    </div>
+                    <h5 class="card-title">Business home/welcome information and pictures</h5>
+                    <p class="card-text">Dynamic media cards of the business.
+                    </p>
+                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="card min-vh-100 min-vw-50">
+                  <div class="card-body">
+                    <div class="media img text-center m-4">
+                      <img
+                        src="https://www.tasteofhome.com/wp-content/uploads/2018/01/Sopes_EXPS_FT23_28372_ST_4_13_1.jpg"
+                        class="card-img-top img-fluid" alt="Card Image" style="width:100%; height:auto;">
+                    </div>
+                    <h5 class="card-title">Business home/welcome information and pictures</h5>
+                    <p class="card-text">Dynamic media cards of the business.
+                    </p>
+                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="card min-vh-100 min-vw-50" style>
+                  <div class="card-body">
+                    <div class="media img text-center m-4">
+                      <img src="https://ontheborder.com.au/wp-content/uploads/2022/03/Mexican-Cuisine-scaled.jpg"
+                        class="card-img-top" alt="Card Image">
+                    </div>
+                    <h5 class="card-title">Reserve your first class!</h5>
+                    <p class="card-text">Reserve the class and learn how to cook you own Mexican food</p>
+                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselWelcome" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselWelcome" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </section>
+      </div>
+      <section id="services" href="#services">
+        <h3 class="midle_title">SELECCIONA TU CIUDAD Y DESCUBRE</h3>
+        <h3 class="midle_title">TODAD LAS CLASES DE COCINA</h3>
+        <h3 class="midle_title" style="margin-bottom: 20px;">QUE ESTAN OCURRIENDO EN TU CIUDAD</h3>
+
+        <p>Welcome to the one stop shop for cooking classes! <br>
+
+          We currently produce our own cooking classes in Los Angeles, NYC, and SF, and partner up with amazing hosts who curate workshops <br> around the country. Our goal is to become your landing page for high quality, sustainability-focused and super fun cooking classes <br> around the country. Whether you're a group of friends or you're looking for couple cooking class ideas, we've got you covered.</p>
+    
+        <div class="public_city_container">
+            <a class="public_city" href="">mexicali</a>
+            <a class="public_city" href="">ciudad de mexico</a>
+            <a class="public_city" href="">polonia</a>
+            <a class="public_city" href="">rusia</a>
+            <a class="public_city" href="">mongolia</a>
+        </div>
+    
+    
+       
+
+<div class="card-container" style="display: flex; flex-direction: column; width: 120px; margin: 0px 150px;">
+  {% for service in services %}
+      <div class="card"style>
+          <!-- Service Image -->
+          <img src="{{ service.picture.url }}" alt="{{ service.name }} Image">
+
+          <div class="overlay" style="margin-top: 10px;">
+            <h5 class="card-title" style="font-weight: bold;">{{ service.name }}</h5>
+
+              <!-- Service Location -->
+              <p>{{ service.location }}</p>
+              
+               <!-- Service Description -->
+               <p class="card-text">{{ service.description }}</p>
+
+               <!-- Service Price 
+               <p class="card-text"><strong>Price:</strong> ${{ service.price }}</p>-->
+          </div>
+          <div><a type="btn" href="#schedule" style="color: white; background: pink; padding: 20px 20px;">Schedule your class</a></div>
+          {% endfor %}
+      </div>
+     
+</div>
+      
+
+       
+
+    </section>
+    
+       
+
+   
+  </div>
+ 
+  <div class="communication-button" style="position: fixed;    bottom: 20px; padding: 20px 20px; background-color: pink;  left: 90%;">
+    <a href="https://api.whatsapp.com/send?phone=NUMERO_DE_TELEFONO" target="_blank">
+        
+        <span style="color: white;">Contáctanos</span>
+    </a>
+</div>
+
+</section>
+<div class="pink-section" style="background-color: pink; text-align: center; padding: 40px; box-sizing: border-box;">
+  <h2 style="margin: 20px auto; max-width: 500px; font-weight: 600; color: white;">Hire a Private Chef</h2>
+  <p style="margin: 0 auto; max-width: 500px; color: white;" >
+    Are you on the lookout for a one-of-a-kind way to share some holiday joy with your loved ones?Search no more! For a short span of ten days, you can book a private class in your home at an incredibly affordable price. Book fast; this is going to sell out quickly.
+  </p>
+  <p class="promo-text" style="margin: 20px auto; color: white;">Special promo valid for classes booked through January 5th, 2024. Los Angeles and Orange County only.</p>
+
+  <div style="background-color: white; margin: auto; width: 70%; padding: 20px; box-sizing: border-box;">
+    <div class="white-section" style="display: flex; max-height: 400px;">
+      <img src="https://static.wixstatic.com/media/9ab2ad_167984344bd84240b1e7334147ffb71c~mv2.jpg/v1/fill/w_469,h_320,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/9ab2ad_167984344bd84240b1e7334147ffb71c~mv2.jpg" alt="Cooking Class Image" style="width: 50%; object-fit: cover;">
+      <div style="margin: auto; display: flex; flex-direction: column; padding: 20px;">
+        <h4 style="font-size: 25px; margin-bottom: 10px;">Private Cooking Class -<br> Holiday Special</h4>
+        <p>2 hr</p>
+        <p>from $600</p>
+        <button style="color: white; background: pink; border: 1px solid pink; font-size: 14px; padding: 10px;">Book Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div style="display: flex; background-color: #f5f5f5; padding: 20px;">
+
+  <img src="https://static.wixstatic.com/media/b8cbe3_fd6d4833d3034ed1a26d6e962b7112a0~mv2.jpg/v1/fill/w_809,h_627,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/b8cbe3_fd6d4833d3034ed1a26d6e962b7112a0~mv2.jpg" alt="Cooking Class Image" style="width: 50%; object-fit: cover;">
+
+  <div style="margin: auto; text-align: left; padding: 20px;">
+    <h4>Team Building & Private Classes</h4>
+
+    <p style="width: 70%;">
+      Private cooking classes and corporate team building experiences are fully customizable. Ingredients kits available upon request. Whether it's a birthday celebration, a couple dinner, father's day, or simply miss your friends, let us set up a private cooking class with you with any chef around the world.
+    </p>
+
+    <button style="color: white; background-color: black; border: 1px solid black; font-size: 14px; padding: 10px; font-weight: 600;">Click Me</button>
+  </div>
+</div>
+
+ 
+  {%endblock%}
