@@ -205,11 +205,26 @@ def calendar_show_view(request):
     return render(request, "calendar_dates.html")
 
 
+# ------------------------
+# recipes view
+# ------------------------
+
+
 def recipes(request):
 
     return render(request, "recipes.html")
 
 
+# ------------------------
+# recipes details view
+# ------------------------
+
+
 def recipes_details(request):
 
     return render(request, "recipes_details.html")
+
+
+def private_clases(request):
+
+    return render(request, "private_class.html")

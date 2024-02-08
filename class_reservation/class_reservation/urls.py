@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 
 from payment.views import payment_failed, payment_successful, payment_cancelled
 from .views import user_reservation_view, payment_reservation_view
+
 from panel.views import (
     add_class_space_view,
     add_service_view,
@@ -18,6 +19,7 @@ from panel.views import (
     calendar_show_view,
     recipes,
     recipes_details,
+    private_clases,
 )
 from panel.forms import ReservationForm
 from django.contrib.auth import views as auth_views
