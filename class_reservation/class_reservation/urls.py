@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.shortcuts import redirect, render
 from .views import user_reservation_view, payment_reservation_view
-from panel.views import add_class_space_view, add_service_view, calendar_panel_view, edit_class_space_view, edit_reservation_view, edit_service_view, payments_panel_view, reservations_panel_view, services_panel_view,Register_view, calendar_show_view, recipes, recipes_details
+from panel.views import add_class_space_view, add_service_view, calendar_panel_view, edit_class_space_view, edit_reservation_view, edit_service_view, payments_panel_view, reservations_panel_view, services_panel_view,Register_view, calendar_show_view, recipes, recipes_details, private_clases
 from panel.forms import ReservationForm
 from django.contrib.auth import views as auth_views
 from django.conf import settings
@@ -37,6 +37,7 @@ urlpatterns = [
     path('recipes/', recipes, name='recipes'),
     path('recipes/details/', recipes_details , name='recipes_details'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
+    path("private-class/", private_clases, name="private"),
     path('calendar',calendar_show_view, name='calendar_show'),
     path('register/', Register_view, name='register'),
     path('logout/', lambda request: redirect('panel:panel'), name='logout'),
@@ -45,7 +46,8 @@ urlpatterns = [
     path('reservation/<int:reservation_id>/payment', payment_reservation_view,
          name='reservation_payment'),
     path("panel/", include((panel_urlpatterns, "panel"), namespace="panel")),
-    path("", home_view)
+    path("", home_view, name="home"),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

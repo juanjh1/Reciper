@@ -6,11 +6,11 @@
     /* Estilos CSS aquí */
     #calendar {
         max-width: 800px;
-        margin: 20px 20px;
+        margin: 0px 20px;
         padding: 20px;
         background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     
+      
     }
 
     header {
@@ -38,7 +38,7 @@
     }
 
     td {
-        border: 1px solid #ddd;
+        
         transition: background-color 0.3s;
         width: 14.28%; /* Ajuste para 7 columnas en una fila */
     }
@@ -70,11 +70,15 @@
 
     <div class="" style="color: black; width: 85%;  background-color:white;  margin: 0px auto;">
 
-        <div style="margin: 20px; padding-top: 20px;"> <p> < Back</p></div>
+        <div style="margin: 20px; padding-top: 20px;"> <a href="{% url 'home' %}"> <i class=" fa fa-solid fa-chevron-left"></i> Back</a ></div>
 
         <h2 style="margin: 20px; margin-top: 40px; font-weight: 900;"> Private Cooking Class - Holiday Special</h2>
-
-        <div id="calendar" style="display: flex; "></div>
+        <p style="margin-left: 20px;">Ready to talk now? Call us at +1 (213) 123-1234.</p>
+        <hr style="width: 95%; border:0.3px solid black; margin: auto;">
+        <h3 style="margin-left: 20px; margin-top: 40px; font-weight: 900; font-size: 20px;">Select a Date and Time</h3>
+        <hr style="width: 60%; border:0.3px solid black; margin-left: 20px;">
+        <div id="calendar" style="display: flex; ">
+        </div>
 
     </div>
 
@@ -99,9 +103,9 @@
         const calendar = `
           <div>
             <header style="display:flex; " >
-              <button onclick="changeMonth(-1)" style=" background:white;border:1px solid white ;" ><</button>
-              <h4>${getMonthName(selectedDate.getMonth())} ${selectedDate.getFullYear()}</h4>
-              <button onclick="changeMonth(1)" style=" background:white;border:1px solid white ;"">></button>
+              <button onclick="changeMonth(-1)" style=" background:white;border:1px solid white ;" ><i class=" fa fa-solid fa-chevron-left"></i></button>
+              <p>${getMonthName(selectedDate.getMonth())}      ${selectedDate.getFullYear()}<p>
+              <button onclick="changeMonth(1)" style=" background:white;border:1px solid white ;""><i class="fa fa-solid fa-chevron-right"></i></button>
             </header>
             <table>
               <thead>
