@@ -1,4 +1,3 @@
-
 {% extends "index.html" %}
 {% load static %}
 
@@ -83,7 +82,7 @@
         }
 
         .communication-button img {
-            width: 30px;
+            width: 50px;
             height: auto;
             margin-right: 10px;
         }
@@ -142,24 +141,7 @@
 <section id="modalSection">
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-      <div class="modal-dialog">
-          <div class="modal-content" style="width: 2wh;">
-              <div class="modal-header">
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <h5 class=""  style="margin-top: 20px; margin-left: auto; margin-right: auto; font-size: 50px; flex-wrap: wrap; font-weight: bold;" >Registro</h5>
-              <form action="{%url 'register'%}" method="post" style="display: flex; flex-direction: column; ">
-                {% csrf_token %}
-                <input class="input_login" type="text" id="usernmae" name="username" required  placeholder="Username" style="margin-top: 20px;  height: 40px;"> 
-                <input class="input_login" type="text" id="nombre" name="nombre" required  placeholder="Nombre" style="margin-top: 20px;  height: 40px;"> 
-                <input  class="input_login" type="text" id="apellido" name="apellido" required placeholder="Apellido" style="margin-top: 20px;   height: 40px;">
-                <input  class="input_login" type="email" id="email" name="email" required placeholder="Email" style="margin-top: 20px;   height: 40px;">
-                <input  class="input_login" type="password" id="password" name="password" required placeholder="Contraeña" style="margin-top: 20px;   height: 40px;">
-                <p style="margin: 20px auto;">¿Ya tienes una cuenta? <a id="openLoginModal" style="color:pink; cursor: pointer;">Ingresa</a></p>
 
-                <button type="submit" class="submit-buttom">Enviar</button>
-            </form>
 
           </div>
       </div>
@@ -262,6 +244,7 @@
         </section>
       </div>
       <section id="services" href="#services">
+      <section id="services" href="#services" style="padding:40px ;">
         <h3 class="midle_title">SELECCIONA TU CIUDAD Y DESCUBRE</h3>
         <h3 class="midle_title">TODAD LAS CLASES DE COCINA</h3>
         <h3 class="midle_title" style="margin-bottom: 20px;">QUE ESTAN OCURRIENDO EN TU CIUDAD</h3>
@@ -271,11 +254,11 @@
           We currently produce our own cooking classes in Los Angeles, NYC, and SF, and partner up with amazing hosts who curate workshops <br> around the country. Our goal is to become your landing page for high quality, sustainability-focused and super fun cooking classes <br> around the country. Whether you're a group of friends or you're looking for couple cooking class ideas, we've got you covered.</p>
     
         <div class="public_city_container">
-            <a class="public_city" href="">mexicali</a>
-            <a class="public_city" href="">ciudad de mexico</a>
-            <a class="public_city" href="">polonia</a>
-            <a class="public_city" href="">rusia</a>
-            <a class="public_city" href="">mongolia</a>
+            <a class="public_city" href="#">LOS ANGELES</a>
+            <a class="public_city" href="#">BAY AREA</a>
+            <a class="public_city" href="#">MEXICO CITY</a>
+            <a class="public_city" href="#">ONLINE CLASSES</a>
+            <a class="public_city" href="#">PRIVATE CLASES</a>
         </div>
     
     
@@ -301,6 +284,8 @@
           </div>
           <div><a type="btn" href="#schedule" style="color: white; background: pink; padding: 20px 20px;">Schedule your class</a></div>
           {% endfor %}
+          <div class="caption" style="display: none;">Selecciona una ciudad para ver las clases.</div>
+       
       </div>
      
 </div>
@@ -315,10 +300,10 @@
    
   </div>
  
-  <div class="communication-button" style="position: fixed;    bottom: 20px; padding: 20px 20px; background-color: pink;  left: 90%;">
+  <div class="communication-button" style="position: fixed;    bottom: 20px; padding: 20px 20px; background-color: pink;  left: 88%;  border-radius: 10px;">
     <a href="https://api.whatsapp.com/send?phone=NUMERO_DE_TELEFONO" target="_blank">
         
-        <span style="color: white;">Contáctanos</span>
+        <span style="color: white; font-weight: 900;"><i class="fa-regular fa-comment-dots" ></i>  Contáctanos</span>
     </a>
 </div>
 
@@ -337,7 +322,7 @@
         <h4 style="font-size: 25px; margin-bottom: 10px;">Private Cooking Class -<br> Holiday Special</h4>
         <p>2 hr</p>
         <p>from $600</p>
-        <button style="color: white; background: pink; border: 1px solid pink; font-size: 14px; padding: 10px;">Book Now</button>
+        <a href="{% url 'calendar_show' %}" style="padding: 10px; width: 100%;"><button style="color: white; background: pink; border: 1px solid pink; font-size: 14px; padding: 10px;">Book Now</button></a>
       </div>
     </div>
   </div>
@@ -360,5 +345,44 @@
   </div>
 </div>
 
- 
   {%endblock%}
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          // Ocultar todas las clases y la caption al principio
+          $('.card, .caption').hide();
+
+          // Mostrar las clases de la primera ciudad por defecto
+          var defaultCity = 'los_angeles';
+          $('.card.' + defaultCity).show();
+
+          // Activar el primer enlace por defecto
+          $('.public_city[data-city="' + defaultCity + '"]').addClass('active');
+
+          // Manejar clic en enlaces de la ciudad
+          $('.public_city').click(function (e) {
+              e.preventDefault();
+
+              // Ocultar todas las clases y la caption
+              $('.card, .caption').hide();
+
+              // Obtener el valor del atributo data-city
+              var city = $(this).data('city');
+
+              // Mostrar las clases de la ciudad seleccionada o la caption si no hay ninguna ciudad seleccionada
+              if ($('.card.' + city).length > 0) {
+                  $('.card.' + city).show();
+              } else {
+                  $('.caption').show();
+              }
+
+              // Agregar clase 'active' al enlace de la ciudad seleccionada y quitarla de los demás
+              $('.public_city').removeClass('active');
+              $(this).addClass('active');
+          });
+      });
+  </script>
+2
