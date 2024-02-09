@@ -75,9 +75,11 @@ urlpatterns = [
     path("paypal/", include("paypal.standard.ipn.urls")),
     path("panel/", include((panel_urlpatterns, "panel"), namespace="panel")),
     path("payment/", include((payment_urlpatterns, "payment"), namespace="payments")),
-    path("", home_view, name="home"),
     path("recipes/", recipes, name="recipes"),
     path("recipes/details/", recipes_details, name="recipes_details"),
+    path("login/", auth_views.LoginView.as_view(), name="login"),
+    path("recipes/", recipes, name="recipes"),
+    path("recipes/details/<int:id>", recipes_details, name="recipes_details"),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("private-class/", private_clases, name="private"),
     path("calendar", calendar_show_view, name="calendar_show"),
@@ -90,7 +92,6 @@ urlpatterns = [
         payment_reservation_view,
         name="reservation_payment",
     ),
-    path("panel/", include((panel_urlpatterns, "panel"), namespace="panel")),
     path("", home_view, name="home"),
 ]
 if settings.DEBUG:

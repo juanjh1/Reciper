@@ -7,8 +7,16 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .models import ClassSpaceModel, Service
 from .forms import ServiceForm
-from panel.models import ClassSpaceModel, Reservation, Service
 from django.contrib import messages
+from panel.models import (
+    ClassSpaceModel,
+    Reservation,
+    Service,
+    Receta,
+    Part_of_reciept,
+    Item_of_recipe,
+)
+
 
 from django.contrib.auth import authenticate, login
 
@@ -212,7 +220,10 @@ def calendar_show_view(request):
 
 def recipes(request):
 
-    return render(request, "recipes.html")
+    context = {
+        "recipes": Receta.objects.all(),
+    }
+    return render(request, "recipes.html", context=context)
 
 
 # ------------------------
@@ -220,11 +231,27 @@ def recipes(request):
 # ------------------------
 
 
-def recipes_details(request):
+def recipes_details(request, id):
 
-    return render(request, "recipes_details.html")
+    recipe = Receta.objects.filter(id=id).first()
+    print(Part_of_reciept.objects.filter(recipe=id))
+    print(Item_of_recipe.objects.all())
+    context = {
+        "recipe": recipe,
+        "recipes_items": Part_of_reciept.objects.filter(recipe=id),
+        "ingredients": Item_of_recipe.objects.all(),
+    }
+
+    return render(request, "recipes_details.html", context=context)
 
 
-def private_clases(request):
+# ------------------------
+# view of
+# ------------------------
+
+
+def private_clases(
+    request,
+):
 
     return render(request, "private_class.html")
