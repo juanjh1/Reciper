@@ -24,21 +24,23 @@
 
     <div class="row">
       <!-- Tarjeta de Receta 1 -->
+    
+    {%for recipe in recipes%}
       <div class="col-md-4 mb-4">
         <div class="card" style="height:max-content;">
-            <img src="https://static.wixstatic.com/media/3b9bbb_0da431b7f8574f2ba3fc7f834599123e~mv2.png/v1/fill/w_302,h_452,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/3b9bbb_0da431b7f8574f2ba3fc7f834599123e~mv2.png" style="width: 302px; height: 180px; object-fit: cover;" alt="Receta 1">
+            <img src="{{ recipe.picture.url }}" style="width: 302px; height: 180px; object-fit: cover;" alt="Receta 1">
             <div class="" style="justify-content: baseline; border-bottom: 1px solid black;  border-left: 1px solid black; border-top: 1px solid black;">
-                <h5 style="font-weight: 800; text-align: justify; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">Título de la Receta 1</h5>
+                <h5 style="font-weight: 800; text-align: justify; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">{{recipe.name}}</h5>
                 <p class="card-text" style="text-align: justify; margin-left: 10px; margin-right: 10px;">
-                    Strawberry Red Punch and Potato Salad
-                    By Chef Chakayla Taylor 🍓 Sip and Savor! 🥔 Freshen up your summer with our tantalizing Strawberry Red Punch and creamy Potato Salad. Bursting with flavor and goodness, this dynamic duo will leave your taste buds dancing all season long!
+                   {{recipe.about}}
                 </p>
                 <div style="margin-left: 85%; padding-bottom: 20px;"> <!-- Agregado para centrar el icono -->
-                   <a href="{%url 'recipes_details'%}"> <i class="fas fa-arrow-right" style="padding: 8px; background-color: black; color: white; border-radius: 100%;"></i></a>
+                   <a href="{%url 'recipes_details' id=recipe.id %}"> <i class="fas fa-arrow-right" style="padding: 8px; background-color: black; color: white; border-radius: 100%;"></i></a>
                 </div>
             </div>
         </div>
     </div>
+    {%endfor%}
     
 
       <!-- Tarjeta de Receta 2 -->

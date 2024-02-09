@@ -163,14 +163,14 @@
     
        
 
-<div class="card-container" style="display: flex; flex-direction: column; width: 120px; margin: 0px 150px;">
+<div class="card-container" style="display: flex; flex-direction: column; width: 120px; margin: 0px 150px; height: 500px">
   {% for service in services %}
       <div class="card"style>
           <!-- Service Image -->
-          <img src="{{ service.picture.url }}" alt="{{ service.name }} Image">
+          <img style="width:300px ; height: 250px; object-fit: cover;" src="{{ service.picture.url }}" alt="{{ service.name }} Image">
 
           <div class="overlay" style="margin-top: 10px;">
-            <h5 class="card-title" style="font-weight: bold;">{{ service.name }}</h5>
+            <p class="card-title" style="font-weight: bold; font-size: 20px;">{{ service.name }}</p>
 
               <!-- Service Location -->
               <p>{{ service.location }}</p>
@@ -199,12 +199,7 @@
    
   </div>
  
-  <div class="communication-button" style="position: fixed;    bottom: 20px; padding: 20px 20px; background-color: pink;  left: 88%;  border-radius: 10px;">
-    <a href="https://api.whatsapp.com/send?phone=NUMERO_DE_TELEFONO" target="_blank">
-        
-        <span style="color: white; font-weight: 900;"><i class="fa-regular fa-comment-dots" ></i>  Contáctanos</span>
-    </a>
-</div>
+  
 
 </section>
 <div class="pink-section" style="background-color: pink; text-align: center; padding: 40px; box-sizing: border-box;">

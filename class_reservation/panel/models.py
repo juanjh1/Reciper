@@ -45,3 +45,33 @@ class Reservation(models.Model):
 
     class Meta:
         app_label = 'panel'
+
+
+class Receta(models.Model):
+    name = models.CharField(max_length=200)
+    prep_time = models.IntegerField()
+    cook_time = models.IntegerField()
+    serves = models.IntegerField()
+    level = models.CharField(max_length=30)
+    tag = models.CharField(max_length=30)
+    about = models.CharField(max_length=1000)
+    picture = models.ImageField(upload_to='recipe/', blank=False)
+
+
+class  Part_of_reciept(models.Model):
+    name = models.CharField(max_length=200)
+    recipe = models.ForeignKey(Receta, on_delete=models.CASCADE)
+
+class Item_of_recipe(models.Model):
+    item = models.CharField(max_length=70)
+    segundo = models.ForeignKey(Part_of_reciept, on_delete=models.CASCADE)
+
+
+class Preparation(models.Model):
+    about = models.CharField(max_length=200)
+    recipe = models.ForeignKey(Receta, on_delete=models.CASCADE)
+
+class Preparation_time_item(models.Model):
+    name = models.CharField(max_length=70)
+    description = models.CharField(max_length=200)
+    recipe = models.ForeignKey(Preparation, on_delete=models.CASCADE)
