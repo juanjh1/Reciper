@@ -180,7 +180,8 @@
         <p><strong>Tickets:</strong> {{ reservation_data.tickets }}</p>
         <p><strong>Total Cost:</strong> {{ reservation_data.total_cost }} USD</p>
       </div>
-      <div id="paypal-button-container"></div>
+      {% comment %} <div id="paypal-button-container"></div> {% endcomment %}
+      {{form.render}}
 
     </div>
   </div>

@@ -143,6 +143,107 @@
   <!-- Modal -->
 
 
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <h5 class="modal-title" id="exampleModalLabel">Ingresar</h5>
+            <!-- Contenido del segundo modal -->
+            <form action="/login" method="post">
+              <div class="container">
+                <h2>Login</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+                </form>
+            </div> 
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+  <div class="content container-fluid">
+    {% if messages %}
+    {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+    <div class="row">
+      <div class="col-12">
+        <section id="welcome" href="#welcome">
+          <div id="carouselWelcome" class="carousel slide" data-bs-ride="carousel-welcome">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="card min-vh-100 min-vw-50">
+                  <div class="card-body">
+                    <div class="media img text-center m-4">
+                      <img
+                        src="https://plus.unsplash.com/premium_photo-1661281229469-d23ef2197d6e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        class="card-img-top" alt="Card Image">
+                    </div>
+                    <h5 class="card-title">Business home/welcome information and pictures</h5>
+                    <p class="card-text">Dynamic media cards of the business.
+                    </p>
+                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="card min-vh-100 min-vw-50">
+                  <div class="card-body">
+                    <div class="media img text-center m-4">
+                      <img
+                        src="https://www.tasteofhome.com/wp-content/uploads/2018/01/Sopes_EXPS_FT23_28372_ST_4_13_1.jpg"
+                        class="card-img-top img-fluid" alt="Card Image" style="width:100%; height:auto;">
+                    </div>
+                    <h5 class="card-title">Business home/welcome information and pictures</h5>
+                    <p class="card-text">Dynamic media cards of the business.
+                    </p>
+                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="card min-vh-100 min-vw-50" style>
+                  <div class="card-body">
+                    <div class="media img text-center m-4">
+                      <img src="https://ontheborder.com.au/wp-content/uploads/2022/03/Mexican-Cuisine-scaled.jpg"
+                        class="card-img-top" alt="Card Image">
+                    </div>
+                    <h5 class="card-title">Reserve your first class!</h5>
+                    <p class="card-text">Reserve the class and learn how to cook you own Mexican food</p>
+                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselWelcome" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselWelcome" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </section>
+      </div>
+      <section id="services" href="#services">
       <section id="services" href="#services" style="padding:40px ;">
         <h3 class="midle_title">SELECCIONA TU CIUDAD Y DESCUBRE</h3>
         <h3 class="midle_title">TODAD LAS CLASES DE COCINA</h3>
