@@ -60,10 +60,7 @@ payment_urlpatterns = [
 
 urlpatterns = [
     path("recipes/", recipes, name="recipes"),
-    path("recipes/details/", recipes_details, name="recipes_details"),
     path("login/", auth_views.LoginView.as_view(), name="login"),
-    path("calendar", calendar_show_view, name="calendar_show"),
-    path("register/", Register_view, name="register"),
     path("logout/", lambda request: redirect("panel:panel"), name="logout"),
     path("admin/", admin.site.urls),
     path("reservation", user_reservation_view, name="reservation"),
@@ -77,15 +74,12 @@ urlpatterns = [
     path("payment/", include((payment_urlpatterns, "payment"), namespace="payments")),
     path("recipes/", recipes, name="recipes"),
     path("recipes/details/", recipes_details, name="recipes_details"),
-    path("login/", auth_views.LoginView.as_view(), name="login"),
     path("recipes/", recipes, name="recipes"),
     path("recipes/details/<int:id>", recipes_details, name="recipes_details"),
-    path("login/", auth_views.LoginView.as_view(), name="login"),
     path("private-class/", private_clases, name="private"),
     path("calendar", calendar_show_view, name="calendar_show"),
     path("register/", Register_view, name="register"),
     path("logout/", lambda request: redirect("panel:panel"), name="logout"),
-    path("admin/", admin.site.urls),
     path("reservation", user_reservation_view, name="reservation"),
     path(
         "reservation/<int:reservation_id>/payment",

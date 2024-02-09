@@ -198,7 +198,7 @@
                     <h5 class="card-title">Business home/welcome information and pictures</h5>
                     <p class="card-text">Dynamic media cards of the business.
                     </p>
-                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+                    <a type="btn" class="btn reservationButton" href="{% url 'calendar_show' %}">Schedule your class</a>
                   </div>
                 </div>
               </div>
@@ -213,7 +213,7 @@
                     <h5 class="card-title">Business home/welcome information and pictures</h5>
                     <p class="card-text">Dynamic media cards of the business.
                     </p>
-                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+                    <a type="btn" class="btn reservationButton" href="{% url 'calendar_show' %}">Schedule your class</a>
                   </div>
                 </div>
               </div>
@@ -226,7 +226,7 @@
                     </div>
                     <h5 class="card-title">Reserve your first class!</h5>
                     <p class="card-text">Reserve the class and learn how to cook you own Mexican food</p>
-                    <a type="btn" class="btn reservationButton" href="#schedule">Schedule your class</a>
+                    <a type="btn" class="btn reservationButton" href="{% url 'calendar_show' %}">Schedule your class</a>
 
                   </div>
                 </div>
@@ -282,7 +282,7 @@
                <!-- Service Price 
                <p class="card-text"><strong>Price:</strong> ${{ service.price }}</p>-->
           </div>
-          <div><a type="btn" href="#schedule" style="color: white; background: pink; padding: 20px 20px;">Schedule your class</a></div>
+          <div><a type="btn" href="{% url 'calendar_show' %}" style="color: white; background: pink; padding: 20px 20px;">Schedule your class</a></div>
           {% endfor %}
           <div class="caption" style="display: none;">Selecciona una ciudad para ver las clases.</div>
        

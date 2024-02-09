@@ -74,6 +74,13 @@
 
         <h2 style="margin: 20px; margin-top: 40px; font-weight: 900;"> Private Cooking Class - Holiday Special</h2>
         <p style="margin-left: 20px;">Ready to talk now? Call us at +1 (213) 123-1234.</p>
+    
+        {% for space in class_spaces %}
+    {{space.day }}
+    {{space.start_time }}
+    {{space.end_time }}
+    {{space.space_type }}
+        {% endfor %}
         <hr style="width: 95%; border:0.3px solid black; margin: auto;">
         <h3 style="margin-left: 20px; margin-top: 40px; font-weight: 900; font-size: 20px;">Select a Date and Time</h3>
         <hr style="width: 60%; border:0.3px solid black; margin-left: 20px;">
@@ -84,7 +91,9 @@
 
 </div>
 
-<script>
+<script type="text/javascript">
+
+    const appointmentsData = {{class_spaces|safe}};
     let selectedDate = new Date();
 
     function changeMonth(delta) {
@@ -98,7 +107,9 @@
     }
 
     function renderCalendar() {
+
         console.log("Rendering calendar for", selectedDate);
+        console.log("available dates for", appointmentsData);
         const calendarContainer = document.getElementById("calendar");
         const calendar = `
           <div>
@@ -158,7 +169,7 @@
             calendarBody += `
                 <td class="${isToday ? 'today' : ''} ${isSameDate(currentDate, selectedDate) ? 'selected' : ''}" onclick="selectDate(${day})">
                     ${day}
-                    ${getAppointmentsForDate(currentDate).length > 0 ? '<div class="appointment"></div>' : ''}
+                    ${getAppointmentsForDate(selectedDate).length > 0 ? '<div class="appointment"></div>' : ''}
                 </td>
             `;
 
@@ -197,13 +208,43 @@
         return date.toLocaleDateString('es-ES', options);
     }
 
-    function getAppointmentsForDate(date) {
+     function oldgetAppointmentsForDate(date) {
         return [
             "10:00 AM ",
             "02:00 PM "
         ];
-    }
+    } 
 
+    function getAppointmentsForDate(date) {
+         const test =[
+{space_type: 'ONLINE', day: '2024-02-21', start_time: '06:00:00', end_time: '12:00:00', week_cyclic: 'false'}
+]
+        // Convert the date to string format 'YYYY-MM-DD'
+        const dateString = date.toISOString().slice(0, 10);
+        console.log("Selected date:", dateString);
+        
+        // Filter the appointments based on the selected date
+        const appointments = test.filter(space => {
+            // Check if space.day is defined and is a string
+            console.log("Selected date data: ", space.day ==dateString);
+            if (typeof space.day === 'string') {
+                // Extract the date portion from space.day (assuming it's in 'YYYY-MM-DD' format)
+                const spaceDate = space.day.slice(0, 10);
+                console.log("Space date:", spaceDate);
+                return spaceDate === dateString;
+            }
+            return false; // Ignore if space.day is undefined or not a string
+        });
+        console.log("Appointments for date:", appointments);
+    
+        // Map the filtered appointments to a formatted string
+        const appts = appointments.map(space => `${space.start_time} - ${space.end_time} (${space.space_type})`);
+        console.log("Appointments for date string:", appts);
+    
+        return appts;
+    }
+    
+    
     renderCalendar();
 </script>
 {% endblock %}
