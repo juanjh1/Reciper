@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .models import ClassSpaceModel, Service
 from .forms import ServiceForm
+
 from django.contrib import messages
 from django.core.serializers import serialize
 import json
@@ -276,4 +277,35 @@ def private_clases(
     request,
 ):
 
-    return render(request, "private_class.html")
+
+    return render( request, 'private_class.html')
+
+
+
+
+# ------------------------
+# view of profile
+# ------------------------
+
+
+def profile (request, id):
+
+    user = User.objects.filter(id=id).first()
+
+    return render( request, 'profile.html')
+
+
+
+# ------------------------
+# view of profile
+# ------------------------
+
+
+def  desc_service (request, id):
+
+    user = User.objects.filter(id=id).first()
+
+    return render( request, 'class_des.html')
+
+
+

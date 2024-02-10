@@ -33,7 +33,7 @@ DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ["https://2b0f-102-88-68-134.ngrok-free.app"]
 
-ALLOWED_HOSTS = ["2b0f-102-88-68-134.ngrok-free.app"]
+ALLOWED_HOSTS = ["2b0f-102-88-68-134.ngrok-free.app", "127.0.0.1"]
 
 LOCAL_APPS = ["panel", "payment"]
 # Application definition
@@ -143,3 +143,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+PAYPAL_BUY_BUTTON_IMAGE = "https://www.paypalobjects.com/webstatic/mktg/logo-center/Security_Banner_234x60_2a.gif"

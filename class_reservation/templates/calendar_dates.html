@@ -19,6 +19,10 @@
         align-items: center;
         margin-bottom: 20px;
     }
+    .weekday {
+        background-color: #98FF98;
+        border:1px solid white;
+    }
 
     table {
         width: 100%;
@@ -57,8 +61,8 @@
         background-color: pink;
         color: #fff;
         font-weight: bold;
-        padding: 5px;
-        border-radius: 4px;
+        padding: 2px;
+        border-radius: 2px;
     }
 
     .schedule {
@@ -146,42 +150,83 @@
         updateSelectedDate();
     }
 
-    function generateCalendarBody() {
-        const firstDayOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
-        const lastDayOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0);
-        const daysInMonth = lastDayOfMonth.getDate();
-        const firstDayOfWeek = firstDayOfMonth.getDay();
+        function oldgenerateCalendarBody() {
+            const firstDayOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+            const lastDayOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0);
+            const daysInMonth = lastDayOfMonth.getDate();
+            const firstDayOfWeek = firstDayOfMonth.getDay();
 
-        let calendarBody = "";
+            let calendarBody = "";
 
-        // Rellenar celdas vacías antes del primer día del mes
-        for (let i = 0; i < firstDayOfWeek; i++) {
-            calendarBody += "<td></td>";
-        }
-
-        // Rellenar días del mes
-        for (let day = 1; day <= daysInMonth; day++) {
-            const currentDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day);
-            const isToday = isSameDate(currentDate, new Date());
-
-            console.log("Rendering day:", day, "Today?", isToday, "Selected?", isSameDate(currentDate, selectedDate));
-
-            calendarBody += `
-                <td class="${isToday ? 'today' : ''} ${isSameDate(currentDate, selectedDate) ? 'selected' : ''}" onclick="selectDate(${day})">
-                    ${day}
-                    ${getAppointmentsForDate(selectedDate).length > 0 ? '<div class="appointment"></div>' : ''}
-                </td>
-            `;
-
-            // Si es el último día de la semana o el último día del mes, cerrar la fila
-            if ((firstDayOfWeek + day - 1) % 7 === 6 || day === daysInMonth) {
-                calendarBody = `<tr>${calendarBody}</tr>`;
+            // Rellenar celdas vacías antes del primer día del mes
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                calendarBody += "<td></td>";
             }
+
+            // Rellenar días del mes
+            for (let day = 1; day <= daysInMonth; day++) {
+                const actualDate = new Date();
+                const currentDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day);
+                const isToday = isSameDate(currentDate, new Date());
+
+                console.log("Rendering day:", day, "Today?", isToday, "Selected?", isSameDate(currentDate, selectedDate));
+
+                calendarBody += `
+                    <td class="${isToday ? 'today' : ''} ${isSameDate(currentDate, selectedDate) ? 'selected' : ''}" onclick="selectDate(${day})">
+                        ${day}
+                        ${getAppointmentsForDate(currentDate).length > 0 ? '<div class="appointment"></div>' : ''}
+                    </td>
+                `;
+
+                // Si es el último día de la semana o el último día del mes, cerrar la fila
+                if ((firstDayOfWeek + day - 1) % 7 === 6 || day === daysInMonth) {
+                    calendarBody = `<tr>${calendarBody}</tr>`;
+                }
+            }
+
+            return calendarBody;
         }
 
-        return calendarBody;
-    }
-
+        function generateCalendarBody() {
+            const firstDayOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+            const lastDayOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0);
+            const daysInMonth = lastDayOfMonth.getDate();
+            const firstDayOfWeek = firstDayOfMonth.getDay();
+        
+            let calendarBody = "";
+        
+            // Fill in empty cells before the first day of the month
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                calendarBody += "<td></td>";
+            }
+        
+            // Fill in days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const actualDate = new Date();
+                const currentDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day);
+                const isToday = isSameDate(currentDate, new Date());
+        
+                console.log("Rendering day:", day, "Today?", isToday, "Selected?", isSameDate(currentDate, selectedDate));
+        
+                // Check if the current day is a weekday (Monday to Friday)
+                const isWeekday = currentDate.getDay() >= 1 && currentDate.getDay() <= 5;
+        
+                calendarBody += `
+                    <td class="${isToday ? 'today' : ''} ${isSameDate(currentDate, selectedDate) ? 'selected' : ''} ${isWeekday ? 'weekday' : ''}" onclick="selectDate(${day})">
+                        ${day}
+                        ${getAppointmentsForDate(currentDate).length > 0 ? '<div class="appointment"></div>' : ''}
+                    </td>
+                `;
+        
+                // If it is the last day of the week or the last day of the month, close the row
+                if ((firstDayOfWeek + day - 1) % 7 === 6 || day === daysInMonth) {
+                    calendarBody = `<tr>${calendarBody}</tr>`;
+                }
+            }
+        
+            return calendarBody;
+        }
+        
     function updateSelectedDate() {
         const monthYearElement = document.querySelector("header h2");
         monthYearElement.innerHTML = `${getMonthName(selectedDate.getMonth())} ${selectedDate.getFullYear()}`;

@@ -9,10 +9,12 @@ from panel.views import (
     add_class_space_view,
     add_service_view,
     calendar_panel_view,
+    desc_service,
     edit_class_space_view,
     edit_reservation_view,
     edit_service_view,
     payments_panel_view,
+    profile,
     reservations_panel_view,
     services_panel_view,
     Register_view,
@@ -21,6 +23,7 @@ from panel.views import (
     recipes_details,
     private_clases,
 )
+
 from panel.forms import ReservationForm
 from django.contrib.auth import views as auth_views
 from django.conf import settings
@@ -59,8 +62,15 @@ payment_urlpatterns = [
 ]
 
 urlpatterns = [
+    path("recipes/details/<int:id>", recipes_details, name="recipes_details"),
+    path("profile/<int:id>", profile, name="profile"),
+    path("service_desc/<int:id>", desc_service, name="service"),
+    path("private-class/", private_clases, name="private"),
+    path("calendar", calendar_show_view, name="calendar_show"),
     path("recipes/", recipes, name="recipes"),
     path("login/", auth_views.LoginView.as_view(), name="login"),
+    path("login/", auth_views.LoginView.as_view(), name="login"),
+    path("register/", Register_view, name="register"),
     path("logout/", lambda request: redirect("panel:panel"), name="logout"),
     path("admin/", admin.site.urls),
     path("reservation", user_reservation_view, name="reservation"),
@@ -74,9 +84,7 @@ urlpatterns = [
     path("payment/", include((payment_urlpatterns, "payment"), namespace="payments")),
     path("recipes/", recipes, name="recipes"),
     path("recipes/details/", recipes_details, name="recipes_details"),
-    path("recipes/", recipes, name="recipes"),
     path("recipes/details/<int:id>", recipes_details, name="recipes_details"),
-    path("private-class/", private_clases, name="private"),
     path("calendar", calendar_show_view, name="calendar_show"),
     path("register/", Register_view, name="register"),
     path("logout/", lambda request: redirect("panel:panel"), name="logout"),
