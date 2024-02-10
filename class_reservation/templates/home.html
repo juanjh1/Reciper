@@ -165,7 +165,7 @@
 
 <div class="card-container" style="display: flex; flex-direction: column; width: 120px; margin: 0px 150px; height: 500px">
   {% for service in services %}
-      <div class="card"style>
+      <div class="card"style="border: 1px black solid">
           <!-- Service Image -->
           <img style="width:300px ; height: 250px; object-fit: cover;" src="{{ service.picture.url }}" alt="{{ service.name }} Image">
 
@@ -181,7 +181,7 @@
                <!-- Service Price 
                <p class="card-text"><strong>Price:</strong> ${{ service.price }}</p>-->
           </div>
-          <div><a type="btn" href="#schedule" style="color: white; background: pink; padding: 20px 20px;">Schedule your class</a></div>
+          <div><a type="btn" href="{% url  'service' id=service.id %}" style="color: white; background: pink; padding: 20px 20px; font-weight: 900;">BUY TICKETS</a></div>
           {% endfor %}
           <div class="caption" style="display: none;">Selecciona una ciudad para ver las clases.</div>
        
@@ -235,12 +235,14 @@
       Private cooking classes and corporate team building experiences are fully customizable. Ingredients kits available upon request. Whether it's a birthday celebration, a couple dinner, father's day, or simply miss your friends, let us set up a private cooking class with you with any chef around the world.
     </p>
 
-    <button style="color: white; background-color: black; border: 1px solid black; font-size: 14px; padding: 10px; font-weight: 600;">Click Me</button>
+    <a href=""><button style="color: white; background-color: black; border: 1px solid black; font-size: 14px; padding: 10px; font-weight: 600;">Click Me</button></a>
   </div>
 </div>
 
-  {%endblock%}
 
+
+
+  {%endblock%}
 
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -248,35 +250,34 @@
       $(document).ready(function () {
           // Ocultar todas las clases y la caption al principio
           $('.card, .caption').hide();
-
+  
           // Mostrar las clases de la primera ciudad por defecto
           var defaultCity = 'los_angeles';
           $('.card.' + defaultCity).show();
-
+  
           // Activar el primer enlace por defecto
           $('.public_city[data-city="' + defaultCity + '"]').addClass('active');
-
+  
           // Manejar clic en enlaces de la ciudad
           $('.public_city').click(function (e) {
               e.preventDefault();
-
+  
               // Ocultar todas las clases y la caption
               $('.card, .caption').hide();
-
+  
               // Obtener el valor del atributo data-city
               var city = $(this).data('city');
-
+  
               // Mostrar las clases de la ciudad seleccionada o la caption si no hay ninguna ciudad seleccionada
               if ($('.card.' + city).length > 0) {
                   $('.card.' + city).show();
               } else {
                   $('.caption').show();
               }
-
+  
               // Agregar clase 'active' al enlace de la ciudad seleccionada y quitarla de los demás
               $('.public_city').removeClass('active');
               $(this).addClass('active');
           });
       });
   </script>
-2

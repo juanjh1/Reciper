@@ -274,8 +274,9 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item" style="padding: 0 15px;">
-              <a class="nav-link" > <i class=" fa fa-solid fa-circle-user" style="color: pink; font-size: 25px;"></i> <span style="color: pink; padding: 20px; text-align: center; align-items: center;">{{user}}</span></a>
+              <a class="nav-link" href="{%url 'profile' id=user.id%}" > <i class=" fa fa-solid fa-circle-user" style="color: pink; font-size: 25px;"></i> <span style="color: pink; padding: 5px; text-align: center; align-items: center;">{{user}}</span></a>
             </li>
+            
             {% else %}
 
             <li class="nav-item" style="padding: 0 15px;">

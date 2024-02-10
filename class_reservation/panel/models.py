@@ -8,7 +8,8 @@ class Service(models.Model):
     description = models.TextField()
     picture = models.ImageField(upload_to='pictures/')
     location = models.CharField(max_length=200)
-
+    inicio = models.TimeField()
+    fin = models.TimeField()
     def __str__(self):
         return f"{self.name} - {self.price}"
 
