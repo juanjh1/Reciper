@@ -9,6 +9,9 @@ from .models import ClassSpaceModel, Service
 from .forms import ServiceForm
 
 from django.contrib import messages
+from django.core.serializers import serialize
+import json
+
 from panel.models import (
     ClassSpaceModel,
     Reservation,
@@ -210,8 +213,27 @@ def Register_view(request):
 
 
 def calendar_show_view(request):
+    class_spaces = ClassSpaceModel.objects.all()
+    data = json.loads(
+        serialize("json", class_spaces)
+    )  # Serialize queryset into JSON format
+    for item in data:
+        item["fields"]["day"] = item["fields"]["day"].split("T")[0]
+        item["fields"]["week_cyclic"] = (
+            "true" if item["fields"]["day"] == True else "false"
+        )
 
-    return render(request, "calendar_dates.html")
+        # Convert date to string format 'YYYY-MM-DD'
+        # item["fields"]["start_time"] = (
+        #     item["fields"]["start_time"].split("T")[1].split("+")[0]
+        # )  # Extract time from datetime
+        # item["fields"]["end_time"] = (
+        #     item["fields"]["end_time"].split("T")[1].split("+")[0]
+        # )  # Extract time from datetime
+
+    context = {"class_spaces": data}
+
+    return render(request, "calendar_dates.html", context=context)
 
 
 # ------------------------

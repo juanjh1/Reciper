@@ -31,9 +31,9 @@ SECRET_KEY = "django-insecure-@nx60d1@5uh6u0zs!$(q1&!ewwvex%-2f7#pd&m%88wh@n9rn^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CSRF_TRUSTED_ORIGINS = ["https://7e8e-102-88-33-198.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = ["https://2b0f-102-88-68-134.ngrok-free.app"]
 
-ALLOWED_HOSTS = ["7e8e-102-88-33-198.ngrok-free.app"]
+ALLOWED_HOSTS = ["2b0f-102-88-68-134.ngrok-free.app", "127.0.0.1"]
 
 LOCAL_APPS = ["panel", "payment"]
 # Application definition
@@ -143,3 +143,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+PAYPAL_BUY_BUTTON_IMAGE = "https://www.paypalobjects.com/webstatic/mktg/logo-center/Security_Banner_234x60_2a.gif"
