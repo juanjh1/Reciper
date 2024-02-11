@@ -1,0 +1,21 @@
+Hello Admin,
+
+A reservation has been sent.
+
+See summary of reservation below
+
+
+Name: {{reservation.name|title }}
+
+Email: {{reservation.email }}
+
+Phone: {{reservation.phone_number }}
+
+Number of Tickets: {{reservation.tickets }}
+
+Class: {{reservation.class_space }}
+
+Service: {{reservation.service }}
+
+Regards,
+The Reciper Team.

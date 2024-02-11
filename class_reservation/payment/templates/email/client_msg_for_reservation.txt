@@ -1,0 +1,23 @@
+Hello {{reservation.name|title }},
+
+Confirmation of your reservation.
+
+See summary of reservation below
+
+
+Name: {{reservation.name|title }}
+
+Email: {{reservation.email }}
+
+Phone: {{reservation.phone_number }}
+
+Number of Tickets: {{reservation.tickets }}
+
+Class: {{reservation.class_space }}
+
+Service: {{reservation.service }}
+
+Total: {{total}}
+
+Regards,
+The Reciper Team.
