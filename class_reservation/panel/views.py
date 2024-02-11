@@ -223,14 +223,6 @@ def calendar_show_view(request):
             "true" if item["fields"]["day"] == True else "false"
         )
 
-        # Convert date to string format 'YYYY-MM-DD'
-        # item["fields"]["start_time"] = (
-        #     item["fields"]["start_time"].split("T")[1].split("+")[0]
-        # )  # Extract time from datetime
-        # item["fields"]["end_time"] = (
-        #     item["fields"]["end_time"].split("T")[1].split("+")[0]
-        # )  # Extract time from datetime
-
     context = {"class_spaces": data}
 
     return render(request, "calendar_dates.html", context=context)
@@ -277,10 +269,7 @@ def private_clases(
     request,
 ):
 
-
-    return render( request, 'private_class.html')
-
-
+    return render(request, "private_class.html")
 
 
 # ------------------------
@@ -288,12 +277,11 @@ def private_clases(
 # ------------------------
 
 
-def profile (request, id):
+def profile(request, id):
 
     user = User.objects.filter(id=id).first()
 
-    return render( request, 'profile.html')
-
+    return render(request, "profile.html")
 
 
 # ------------------------
@@ -301,11 +289,8 @@ def profile (request, id):
 # ------------------------
 
 
-def  desc_service (request, id):
+def desc_service(request, id):
 
     user = User.objects.filter(id=id).first()
 
-    return render( request, 'class_des.html')
-
-
-
+    return render(request, "class_des.html")

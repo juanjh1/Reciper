@@ -56,7 +56,11 @@ panel_urlpatterns = [
 ]
 
 payment_urlpatterns = [
-    path("payment_successful", payment_successful, name="payment_successful"),
+    path(
+        "payment_successful/<int:reservation_id>/<str:invoice_id>",
+        payment_successful,
+        name="payment_successful",
+    ),
     path("payment_failed", payment_failed, name="payment_failed"),
     path("payment_cancelled", payment_cancelled, name="payment_cancelled"),
 ]

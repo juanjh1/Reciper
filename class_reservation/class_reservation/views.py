@@ -7,6 +7,9 @@ from panel.models import ClassSpaceModel, Reservation, Service
 from panel.forms import PaymentForm, ReservationForm
 import os
 from paypal.standard.forms import PayPalPaymentsForm
+from payment.models import ReservationPayment
+
+from utils.mailers import email_admin
 
 
 def user_reservation_view(request):
@@ -58,6 +61,8 @@ def payment_reservation_view(request, reservation_id):
         "total_cost": total_cost,
     }
     invoice_id = generate_unique_invoice_id()
+
+    kwargs = {"reservation_id": reservation_id, "invoice_id": invoice_id}
     paypal_dict = {
         "business": os.environ.get(
             "PAYPAL_RECEIVER_EMAIL", "sb-47rpes28754189@business.example.com"
@@ -67,9 +72,11 @@ def payment_reservation_view(request, reservation_id):
         "item_name": f"{reservation.service.name} : {reservation.class_space.day} : {reservation.class_space.start_time} - {reservation.class_space.end_time}",
         "invoice": invoice_id,
         "notify_url": request.build_absolute_uri(reverse("paypal-ipn")),
-        "return": request.build_absolute_uri(reverse("payments:payment_successful")),
+        "return": request.build_absolute_uri(
+            reverse("payments:payment_successful", kwargs=kwargs)
+        ),
         "cancel_return": request.build_absolute_uri(
-            reverse("payments:payment_successful")
+            reverse("payments:payment_cancelled")
         ),
         "custom": {"type": "reservation", id: reservation_id, "user": request.user.id},
     }
