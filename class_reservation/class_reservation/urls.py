@@ -20,6 +20,8 @@ from panel.views import (
     recipes,
     recipes_details,
     private_clases,
+    desc_service,
+    profile
 )
 
 from panel.forms import ReservationForm
@@ -32,6 +34,7 @@ from panel.models import Service
 
 def home_view(request):
     services = Service.objects.all()
+    print(services)
     return render(request, "home.html", context={"services": services})
 
 

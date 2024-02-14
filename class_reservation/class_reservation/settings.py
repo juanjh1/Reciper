@@ -31,9 +31,9 @@ SECRET_KEY = "django-insecure-@nx60d1@5uh6u0zs!$(q1&!ewwvex%-2f7#pd&m%88wh@n9rn^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CSRF_TRUSTED_ORIGINS = ["https://7e8e-102-88-33-198.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = ["https://7e8e-102-88-33-198.ngrok-free.app", "*"]
 
-ALLOWED_HOSTS = ["7e8e-102-88-33-198.ngrok-free.app"]
+ALLOWED_HOSTS = ["7e8e-102-88-33-198.ngrok-free.app", ]
 
 LOCAL_APPS = ["panel", "payment"]
 # Application definition
