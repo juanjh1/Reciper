@@ -35,6 +35,7 @@ CSRF_TRUSTED_ORIGINS = ["https://7e8e-102-88-33-198.ngrok-free.app", "*"]
 
 ALLOWED_HOSTS = ["7e8e-102-88-33-198.ngrok-free.app", ]
 
+
 LOCAL_APPS = ["panel", "payment"]
 # Application definition
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "paypal.standard.ipn",
+    "background_task",
 ] + LOCAL_APPS
 
 PAYPAL_TEST = os.environ.get("PAYPAL_TEST", True)
@@ -143,3 +145,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+PAYPAL_BUY_BUTTON_IMAGE = "https://www.paypalobjects.com/webstatic/mktg/logo-center/Security_Banner_234x60_2a.gif"
+
+
+BACKGROUND_TASKS_QUEUE_NAME = "default"
+BACKGROUND_TASKS_BACKEND = "background_tasks.backends.DatabaseBackend"
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

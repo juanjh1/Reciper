@@ -9,10 +9,12 @@ from panel.views import (
     add_class_space_view,
     add_service_view,
     calendar_panel_view,
+    desc_service,
     edit_class_space_view,
     edit_reservation_view,
     edit_service_view,
     payments_panel_view,
+    profile,
     reservations_panel_view,
     services_panel_view,
     Register_view,
@@ -29,7 +31,6 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from panel.models import Service
-
 
 
 def home_view(request):
@@ -58,24 +59,23 @@ panel_urlpatterns = [
 ]
 
 payment_urlpatterns = [
-    path("payment_successful", payment_successful, name="payment_successful"),
+    path(
+        "payment_successful/<int:reservation_id>/<str:invoice_id>",
+        payment_successful,
+        name="payment_successful",
+    ),
     path("payment_failed", payment_failed, name="payment_failed"),
     path("payment_cancelled", payment_cancelled, name="payment_cancelled"),
 ]
 
 urlpatterns = [
-
-    path('recipes/details/<int:id>', recipes_details , name='recipes_details'),
-    path("profile/<int:id>", profile, name="profile" ),
+    path("recipes/details/<int:id>", recipes_details, name="recipes_details"),
+    path("profile/<int:id>", profile, name="profile"),
     path("service_desc/<int:id>", desc_service, name="service"),
-
     path("private-class/", private_clases, name="private"),
-    path('calendar',calendar_show_view, name='calendar_show'),
-
-
-
+    path("calendar", calendar_show_view, name="calendar_show"),
     path("recipes/", recipes, name="recipes"),
-
+    path("login/", auth_views.LoginView.as_view(), name="login"),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("register/", Register_view, name="register"),
     path("logout/", lambda request: redirect("panel:panel"), name="logout"),
@@ -87,20 +87,14 @@ urlpatterns = [
         name="reservation_payment",
     ),
     path("paypal/", include("paypal.standard.ipn.urls")),
-
     path("panel/", include((panel_urlpatterns, "panel"), namespace="panel")),
     path("payment/", include((payment_urlpatterns, "payment"), namespace="payments")),
     path("recipes/", recipes, name="recipes"),
     path("recipes/details/", recipes_details, name="recipes_details"),
-    path("login/", auth_views.LoginView.as_view(), name="login"),
-    path("recipes/", recipes, name="recipes"),
     path("recipes/details/<int:id>", recipes_details, name="recipes_details"),
-    path("login/", auth_views.LoginView.as_view(), name="login"),
-    path("private-class/", private_clases, name="private"),
     path("calendar", calendar_show_view, name="calendar_show"),
     path("register/", Register_view, name="register"),
     path("logout/", lambda request: redirect("panel:panel"), name="logout"),
-    path("admin/", admin.site.urls),
     path("reservation", user_reservation_view, name="reservation"),
     path(
         "reservation/<int:reservation_id>/payment",
