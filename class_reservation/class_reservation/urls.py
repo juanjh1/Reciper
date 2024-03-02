@@ -23,7 +23,7 @@ from panel.views import (
     recipes_details,
     private_clases,
     desc_service,
-    profile
+    profile, services_view
 )
 
 from panel.forms import ReservationForm
@@ -48,8 +48,7 @@ panel_urlpatterns = [
     path("calendar", calendar_panel_view, name="calendar"),
     path("calendar/space", add_class_space_view, name="add_class_space"),
     path(
-        "calendar/space/edit/<int:id>", edit_class_space_view, name="edit_class_space"
-    ),
+        "calendar/space/edit/<int:id>", edit_class_space_view, name="edit_class_space"),
     path("reservations", reservations_panel_view, name="reservations"),
     path("reservations/edit/<int:id>", edit_reservation_view, name="edit_reservation"),
     path("payments", payments_panel_view, name="payments"),
@@ -90,6 +89,7 @@ urlpatterns = [
     path("panel/", include((panel_urlpatterns, "panel"), namespace="panel")),
     path("payment/", include((payment_urlpatterns, "payment"), namespace="payments")),
     path("recipes/", recipes, name="recipes"),
+     path("services/", services_view, name="services"),
     path("recipes/details/", recipes_details, name="recipes_details"),
     path("recipes/details/<int:id>", recipes_details, name="recipes_details"),
     path("calendar", calendar_show_view, name="calendar_show"),

@@ -31,9 +31,9 @@ SECRET_KEY = "django-insecure-@nx60d1@5uh6u0zs!$(q1&!ewwvex%-2f7#pd&m%88wh@n9rn^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CSRF_TRUSTED_ORIGINS = ["https://7e8e-102-88-33-198.ngrok-free.app", "*"]
+CSRF_TRUSTED_ORIGINS = ["https://7e8e-102-88-33-198.ngrok-free.app"]
 
-ALLOWED_HOSTS = ["7e8e-102-88-33-198.ngrok-free.app", ]
+ALLOWED_HOSTS = ["7e8e-102-88-33-198.ngrok-free.app", "*"]
 
 
 LOCAL_APPS = ["panel", "payment"]
@@ -89,7 +89,7 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "reservation_database",
@@ -98,7 +98,17 @@ DATABASES = {
         "USER": "root",
         "PASSWORD": os.environ.get("DB_PASSWORD", "Asia_27."),
     }
+}"""
+
+import os
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

@@ -17,6 +17,7 @@
           <ul>
             {% for class_space in class_spaces %}
               <li class="shadow rounded-lg p-4 mb-2 {% if class_space.space_type == 'OFFLINE' %}bg-gray-300{% else %}bg-white{% endif %}">
+                <p>date: <span class="font-semibold">{{ class_space.day }}</span></p>
                 <p>Type: <span class="font-semibold">{{ class_space.space_type }}</span></p>
                 <p>Start Time: <span class="font-semibold">{{ class_space.start_time }}</span></p>
                 <p>End Time: <span class="font-semibold">{{ class_space.end_time }}</span></p>

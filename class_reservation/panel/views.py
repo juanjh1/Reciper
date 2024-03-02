@@ -285,7 +285,7 @@ def profile(request, id):
 
 
 # ------------------------
-# view of profile
+# description servive
 # ------------------------
 
 
@@ -294,3 +294,17 @@ def desc_service(request, id):
     user = User.objects.filter(id=id).first()
 
     return render(request, "class_des.html")
+
+
+# ------------------------
+#  services view
+# ------------------------
+
+
+def services_view(request):
+
+    services = Service.objects.all()
+    context = {
+        "services":services
+    }
+    return render(request, "services.html", context=context)

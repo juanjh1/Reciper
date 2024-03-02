@@ -264,7 +264,7 @@
               <a class="nav-link active" aria-current="page" href="{%url 'home'%}" style="color: black;">Home</a>
             </li>
             <li class="nav-item" style="padding: 0 15px;">
-              <a class="nav-link" href="#services" style="color: black;">Services</a>
+              <a class="nav-link" href="{%url 'services'%}" style="color: black;">Services</a>
             </li>
             <li class="nav-item" style="padding: 0 15px;"> 
               <a class="nav-link" href="{%url 'recipes'%}" style="color: black;">Recipes</a>
@@ -274,13 +274,13 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item" style="padding: 0 15px;">
-              <a class="nav-link" href="{%url 'profile' id=user.id%}" > <i class=" fa fa-solid fa-circle-user" style="color: pink; font-size: 25px;"></i> <span style="color: pink; padding: 5px; text-align: center; align-items: center;">{{user}}</span></a>
+              <a class="nav-link" style="background-color: pink; border-radius: 5px;" href="{%url 'profile' id=user.id%}" >{{user}}</a>
             </li>
             
             {% else %}
 
             <li class="nav-item" style="padding: 0 15px;">
-              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal" > <i class=" fa fa-solid fa-circle-user" style="color: pink; font-size: 25px;"></i> <span style="color: pink; padding-bottom: 20px; padding: 20px; text-align: center; align-items: center;">Registrate</span></a>
+              <a class="nav-link " style="background-color: pink; border-radius: 5px;" data-bs-toggle="modal" data-bs-target="#myModal" > Registrate</a>
             </li>
             {% endif %}
 
