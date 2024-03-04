@@ -1,6 +1,6 @@
-<!-- payment_cancelled.html -->
-<!DOCTYPE html>
-<html lang="en">
+{% extends "index.html" %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +11,12 @@
         /* Add custom styles here if needed */
     </style>
 </head>
-<body>
+{%block content%}
     <div class="container mt-5">
         <div class="jumbotron text-center">
             <h1 class="display-4">Payment </h1>
             {{form.render}}
             </div>
     </div>
-</body>
-</html>
-    
+
+{%endblock%}

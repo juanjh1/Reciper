@@ -1,41 +1,93 @@
 {% extends "index.html" %}
 {% load static %}
 
-
-{%block content%}
+{% block content %}
 
 <style>
   /* Estilos para el video */
   #video-background {
-      
-       top: 0;
-       left: 0;
-       width: 100%;
-       height: 100%;
-       z-index: -1; /* Colocar el video detrás de todo */
-       overflow: hidden; /* Evitar que el video se desborde */
-   }
-   
-   /* Estilos para el contenido sobre el video */
-   .content {
-       position: relative;
-       z-index: 1; /* Colocar el contenido sobre el video */
-       color: white;
-       text-align: center;
-       padding: 50px;
-   }
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Colocar el video detrás de todo */
+    overflow: hidden; /* Evitar que el video se desborde */
+  
+  }
+
+  /* Estilos para la barra */
+  .overlay-bar {
+    position: absolute; /* Posicionar la barra con respecto al contenedor padre */
+    top: 50%; /* Colocar la barra en la mitad del contenedor */
+    left: 0; /* Alinear la barra a la izquierda del contenedor */
+    width: 100%; /* Hacer que la barra ocupe todo el ancho del contenedor */
+    transform: translateY(-50%); /* Centrar verticalmente la barra */
+    background-color: white; /* Color de fondo semitransparente */
+    color:  black; /* Color de texto blanco */
+    padding: 20px; /* Espacio interno de la barra */
+    text-align: center; /* Alinear el texto al centro */
+  }
+
+  /* Estilos para el contenido sobre el video */
+  .content {
+    position: relative;
+    z-index: 1; /* Colocar el contenido sobre el video */
+    color: white;
+    text-align: center;
+    padding: 50px;
+  }
 </style>
+
 <!-- Video de fondo -->
 <video autoplay muted loop id="video-background">
   <source src="https://player.vimeo.com/external/381327091.sd.mp4?s=52e5f8db541caf3b58f5a4e3a05c92f149ea4b36&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
   Tu navegador no soporta la etiqueta de video.
 </video>
 
-<!-- Contenido sobre el video -->
-<div class="content">
-  <h2 style="color: black;">BOOK A PRIVATE COOKING PARTY</h2>
- <a href="#">HOST YOUR NEXT VIRTUAL OR IN PERSON COOKING CLASS >></a>
+<!-- Barra sobre el video -->
+<div class="overlay-bar">
+  <h2 style="color: black; font-weight:bold;" >BOOK A PRIVATE
+    COOKING PARTY</h2>
+  <a href="#">HOST YOUR NEXT VIRTUAL OR IN PERSON COOKING CLASS >></a>
 </div>
 
 
-{%endblock%}
+<section id="services" href="#services" style="padding:40px ;">
+
+  <div class="public_city_container">
+     
+      <a class="public_city" href="#">MEXICO CITY</a>
+      <a class="public_city" href="#">ONLINE CLASSES</a>
+      
+  </div>
+  
+<div class="card-container" style="display: flex; flex-direction: column; width: 120px; margin: 0px 150px; height: 500px">
+  {% for service in services %}
+      <div class="card"style="border: 1px black solid">
+          <!-- Service Image -->
+          <img style="width:300px ; height: 250px; object-fit: cover;" src="{{ service.picture.url }}" alt="{{ service.name }} Image">
+
+          <div class="overlay" style="margin-top: 10px;">
+            <p class="card-title" style="font-weight: bold; font-size: 20px;">{{ service.name }}</p>
+
+              <!-- Service Location -->
+              <p>{{ service.location }}</p>
+              
+               <!-- Service Description -->
+               <p class="card-text">{{ service.description }}</p>
+
+               <!-- Service Price 
+               <p class="card-text"><strong>Price:</strong> ${{ service.price }}</p>-->
+          </div>
+          <div><a type="btn" href="{% url  'service' id=service.id %}" style="color: white; background: pink; padding: 20px 20px; font-weight: 900;">BUY TICKETS</a></div>
+          {% endfor %}
+          <div class="caption" style="display: none;">Selecciona una ciudad para ver las clases.</div>
+       
+      </div>
+     
+</div>
+  
+</section>
+
+
+{% endblock %}

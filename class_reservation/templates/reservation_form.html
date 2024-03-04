@@ -1,222 +1,713 @@
+{% extends "index.html" %}
 {% load static %}
 <!-- TODO: Center all cards and standarize their size to become full almost full screen -->
-<!doctype html>
-<html>
 
-<head>
-  <meta charset="UTF-8">
-  <!-- For proper mobile responsive -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link href="styles.internal.css" rel="stylesheet">
-  <style>
-    /* TODO: Move to static files (CDN - W3)
-.container {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-gap: 10px;
-  }
-  
-  .item {
-    grid-column: span 2;
-  }
-  
+{%block content%}
 
-.bg-pink {
-  border-color: aqua;
-  color: white;
-  background-color: rgb(255,0,126);
+<style>
+  :root {
+    /* This color palletes from Tailwind CSS */
+    --white: #fff;
+    --black: #000;
+    
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    --slate-950: #020617;
+
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --gray-950: #030712;
+
+    --zinc-50: #fafafa;
+    --zinc-100: #f4f4f5;
+    --zinc-200: #e4e4e7;
+    --zinc-300: #d4d4d8;
+    --zinc-400: #a1a1aa;
+    --zinc-500: #71717a;
+    --zinc-600: #52525b;
+    --zinc-700: #3f3f46;
+    --zinc-800: #27272a;
+    --zinc-900: #18181b;
+    --zinc-950: #09090b;
+    
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #e5e5e5;
+    --neutral-300: #d4d4d4;
+    --neutral-400: #a3a3a3;
+    --neutral-500: #737373;
+    --neutral-600: #525252;
+    --neutral-700: #404040;
+    --neutral-800: #262626;
+    --neutral-900: #171717;
+    --neutral-950: #0a0a0a;
+
+    --stone-50: #fafaf9;
+    --stone-100: #f5f5f4;
+    --stone-200: #e7e5e4;
+    --stone-300: #d6d3d1;
+    --stone-400: #a8a29e;
+    --stone-500: #78716c;
+    --stone-600: #57534e;
+    --stone-700: #44403c;
+    --stone-800: #292524;
+    --stone-900: #1c1917;
+    --stone-950: #0c0a09;
+
+    --red-50: #fef2f2;
+    --red-100: #fee2e2;
+    --red-200: #fecaca;
+    --red-300: #fca5a5;
+    --red-400: #f87171;
+    --red-500: #ef4444;
+    --red-600: #dc2626;
+    --red-700: #b91c1c;
+    --red-800: #991b1b;
+    --red-900: #7f1d1d;
+    --red-950: #450a0a;
+
+    --orange-50: #fff7ed;
+    --orange-100: #ffedd5;
+    --orange-200: #fed7aa;
+    --orange-300: #fdba74;
+    --orange-400: #fb923c;
+    --orange-500: #f97316;
+    --orange-600: #ea580c;
+    --orange-700: #c2410c;
+    --orange-800: #9a3412;
+    --orange-900: #7c2d12;
+    --orange-950: #431407;
+
+    --amber-50: #fffbeb;
+    --amber-100: #fef3c7;
+    --amber-200: #fde68a;
+    --amber-300: #fcd34d;
+    --amber-400: #fbbf24;
+    --amber-500: #f59e0b;
+    --amber-600: #d97706;
+    --amber-700: #b45309;
+    --amber-800: #92400e;
+    --amber-900: #78350f;
+    --amber-950: #451a03;
+
+    --yellow-50: #fefce8;
+    --yellow-100: #fef9c3;
+    --yellow-200: #fef08a;
+    --yellow-300: #fde047;
+    --yellow-400: #facc15;
+    --yellow-500: #eab308;
+    --yellow-600: #ca8a04;
+    --yellow-700: #a16207;
+    --yellow-800: #854d0e;
+    --yellow-900: #713f12;
+    --yellow-950: #422006;
+
+    --lime-50: #f7fee7;
+    --lime-100: #ecfccb;
+    --lime-200: #d9f99d;
+    --lime-300: #bef264;
+    --lime-400: #a3e635;
+    --lime-500: #84cc16;
+    --lime-600: #65a30d;
+    --lime-700: #4d7c0f;
+    --lime-800: #3f6212;
+    --lime-900: #365314;
+    --lime-950: #1a2e05;
+
+    --green-50: #f0fdf4;
+    --green-100: #dcfce7;
+    --green-200: #bbf7d0;
+    --green-300: #86efac;
+    --green-400: #4ade80;
+    --green-500: #22c55e;
+    --green-600: #16a34a;
+    --green-700: #15803d;
+    --green-800: #166534;
+    --green-900: #14532d;
+    --green-950: #052e16;
+
+    --emerald-50: #ecfdf5;
+    --emerald-100: #d1fae5;
+    --emerald-200: #a7f3d0;
+    --emerald-300: #6ee7b7;
+    --emerald-400: #34d399;
+    --emerald-500: #10b981;
+    --emerald-600: #059669;
+    --emerald-700: #047857;
+    --emerald-800: #065f46;
+    --emerald-900: #064e3b;
+    --emerald-950: #022c22;
+
+    --teal-50: #f0fdfa;
+    --teal-100: #ccfbf1;
+    --teal-200: #99f6e4;
+    --teal-300: #5eead4;
+    --teal-400: #2dd4bf;
+    --teal-500: #14b8a6;
+    --teal-600: #0d9488;
+    --teal-700: #0f766e;
+    --teal-800: #115e59;
+    --teal-900: #134e4a;
+    --teal-950: #042f2e;
+
+    --cyan-50: #ecfeff;
+    --cyan-100: #cffafe;
+    --cyan-200: #a5f3fc;
+    --cyan-300: #67e8f9;
+    --cyan-400: #22d3ee;
+    --cyan-500: #06b6d4;
+    --cyan-600: #0891b2;
+    --cyan-700: #0e7490;
+    --cyan-800: #155e75;
+    --cyan-900: #164e63;
+    --cyan-950: #083344;
+
+    --sky-50: #f0f9ff;
+    --sky-100: #e0f2fe;
+    --sky-200: #bae6fd;
+    --sky-300: #7dd3fc;
+    --sky-400: #38bdf8;
+    --sky-500: #0ea5e9;
+    --sky-600: #0284c7;
+    --sky-700: #0369a1;
+    --sky-800: #075985;
+    --sky-900: #0c4a6e;
+    --sky-950: #082f49;
+    
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-300: #93c5fd;
+    --blue-400: #60a5fa;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --blue-900: #1e3a8a;
+    --blue-950: #172554;
+
+    --indigo-50: #eef2ff;
+    --indigo-100: #e0e7ff;
+    --indigo-200: #c7d2fe;
+    --indigo-300: #a5b4fc;
+    --indigo-400: #818cf8;
+    --indigo-500: #6366f1;
+    --indigo-600: #4f46e5;
+    --indigo-700: #4338ca;
+    --indigo-800: #3730a3;
+    --indigo-900: #312e81;
+    --indigo-950: #1e1b4b;
+
+    --violet-50: #f5f3ff;
+    --violet-100: #ede9fe;
+    --violet-200: #ddd6fe;
+    --violet-300: #c4b5fd;
+    --violet-400: #a78bfa;
+    --violet-500: #8b5cf6;
+    --violet-600: #7c3aed;
+    --violet-700: #6d28d9;
+    --violet-800: #5b21b6;
+    --violet-900: #4c1d95;
+    --violet-950: #2e1065;
+
+    --purple-50: #faf5ff;
+    --purple-100: #f3e8ff;
+    --purple-200: #e9d5ff;
+    --purple-300: #d8b4fe;
+    --purple-400: #c084fc;
+    --purple-500: #a855f7;
+    --purple-600: #9333ea;
+    --purple-700: #7e22ce;
+    --purple-800: #6b21a8;
+    --purple-900: #581c87;
+    --purple-950: #3b0764;
+
+    --fuchsia-50: #fdf4ff;
+    --fuchsia-100: #fae8ff;
+    --fuchsia-200: #f5d0fe;
+    --fuchsia-300: #f0abfc;
+    --fuchsia-400: #e879f9;
+    --fuchsia-500: #d946ef;
+    --fuchsia-600: #c026d3;
+    --fuchsia-700: #a21caf;
+    --fuchsia-800: #86198f;
+    --fuchsia-900: #701a75;
+    --fuchsia-950: #4a044e;
+
+    --pink-50: #fdf2f8;
+    --pink-100: #fce7f3;
+    --pink-200: #fbcfe8;
+    --pink-300: #f9a8d4;
+    --pink-400: #f472b6;
+    --pink-500: #ec4899;
+    --pink-600: #db2777;
+    --pink-700: #be185d;
+    --pink-800: #9d174d;
+    --pink-900: #831843;
+    --pink-950: #500724;
+
+    --rose-50: #fff1f2;
+    --rose-100: #ffe4e6;
+    --rose-200: #fecdd3;
+    --rose-300: #fda4af;
+    --rose-400: #fb7185;
+    --rose-500: #f43f5e;
+    --rose-600: #e11d48;
+    --rose-700: #be123c;
+    --rose-800: #9f1239;
+    --rose-900: #881337;
+    --rose-950: #4c0519;
 }
+  * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font: inherit;
+ }
+ body {
+     font-family: 'Inter', sans-serif;
+     color: var(--gray-900);
+     background-color: var(--gray-50);
+ }
+ .container {
+     max-width: 940px;
+     margin: 0 auto;
+     padding: 0 16px;
+ }
+ /* end: Globals */
+ 
+ 
+ 
+ /* start: Payment */
+ .payment-section {
+     padding: 48px 0;
+ }
+ .payment-wrapper {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 24px;
+ }
+ .payment-header {
+     padding: 24px;
+     background-color: var(--indigo-500);
+     border-radius: 12px;
+     padding-bottom: 72px;
+ }
+ .payment-header-icon {
+     width: 48px;
+     height: 48px;
+     border-radius: 50%;
+     background-color: var(--indigo-600);
+     color: var(--white);
+     font-size: 24px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-bottom: 12px;
+ }
+ .payment-header-title {
+     font-size: 20px;
+     font-weight: 600;
+     color: var(--white);
+     line-height: 1.4;
+     margin-bottom: 4px;
+ }
+ .payment-header-description {
+     font-size: 15px;
+     color: var(--gray-200);
+     line-height: 1.5;
+ }
+ .payment-content {
+     padding: 24px;
+     margin-top: -64px;
+     position: relative;
+ }
+ .payment-content::before {
+     content: '';
+     position: absolute;
+     top: 24px;
+     left: 50%;
+     transform: translateX(-50%);
+     width: calc(100% - 32px);
+     height: 16px;
+     border-radius: 4px;
+     background-color: var(--indigo-600);
+ }
+ .payment-body {
+     background-color: var(--white);
+     border-radius: 0 0 8px 8px;
+     box-shadow: 0 4px 24px rgba(0, 0, 0, .05), inset 0 8px 0 rgba(0, 0, 0, .05);
+     position: relative;
+     padding-top: 8px;
+     overflow: hidden;
+ }
+ .payment-plan {
+     display: flex;
+     align-items: center;
+     padding: 12px;
+ }
+ .payment-plan-type {
+     width: 40px;
+     height: 40px;
+     background-color: var(--indigo-500);
+     color: var(--white);
+     font-size: 13px;
+     font-weight: 600;
+     flex-shrink: 0;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-radius: 4px;
+     margin-right: 8px;
+ }
+ .payment-plan-info {
+     width: 100%;
+     margin-right: 8px;
+     display: grid;
+ }
+ .payment-plan-info-name {
+     font-size: 13px;
+     color: var(--gray-400);
+     margin-bottom: 2px;
+     white-space: nowrap;
+     text-overflow: ellipsis;
+     overflow: hidden;
+ }
+ .payment-plan-info-price {
+     font-weight: 600;
+     white-space: nowrap;
+     text-overflow: ellipsis;
+     overflow: hidden;
+ }
+ .payment-plan-change {
+     color: var(--blue-500);
+     font-size: 12px;
+     font-weight: 600;
+     text-underline-offset: 2px;
+ }
+ .payment-plan-change:hover {
+     color: var(--blue-600);
+ }
+ .payment-summary-item {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 6px 12px;
+ }
+ .payment-summary-name {
+     font-size: 14px;
+     color: var(--gray-500);
+ }
+ .payment-summary-price {
+     font-weight: 500;
+     font-size: 15px;
+ }
+ .payment-summary-divider {
+     width: calc(100% - 16px);
+     height: 0;
+     margin: 12px auto;
+     border-bottom: 1px dashed var(--gray-200);
+     position: relative;
+ }
+ .payment-summary-divider::before {
+     content: '';
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+     right: 100%;
+     width: 16px;
+     height: 16px;
+     border-radius: 50%;
+     background-color: var(--gray-50);
+     box-shadow: inset 0 2px 16px rgba(0, 0, 0, .05);
+ }
+ .payment-summary-divider::after {
+     content: '';
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+     left: 100%;
+     width: 16px;
+     height: 16px;
+     border-radius: 50%;
+     background-color: var(--gray-50);
+     box-shadow: inset 0 2px 16px rgba(0, 0, 0, .05);
+ }
+ .payment-summary-total {
+     padding-bottom: 16px;
+ }
+ .payment-summary-total .payment-summary-name {
+     color: var(--gray-900);
+ }
+ .payment-summary-total .payment-summary-price {
+     font-size: 16px;
+     color: var(--indigo-500);
+     font-weight: 600;
+ }
+ .payment-right {
+     min-width: 0;
+ }
+ .payment-form {
+     padding: 24px;
+     background-color: var(--white);
+     border-radius: 12px;
+     box-shadow: 0 4px 24px rgba(0, 0, 0, .05);
+ }
+ .payment-title {
+     font-size: 22px;
+     font-weight: 700;
+     margin-bottom: 12px;
+     line-height: 1.3;
+ }
+ .payment-method {
+     display: flex;
+     align-items: center;
+     overflow-x: auto;
+     padding: 6px 0;
+     margin-bottom: 12px;
+     width: 100%;
+ }
+ .payment-method input {
+     display: none;
+ }
+ .payment-method-item {
+     width: 80px;
+     height: 80px;
+     padding: 8px;
+     border: 1px solid var(--gray-200);
+     border-radius: 8px;
+     margin-right: 12px;
+     cursor: pointer;
+     position: relative;
+     flex-shrink: 0;
+ }
+ input:checked + .payment-method-item {
+     border-color: var(--indigo-500);
+ }
+ input:checked + .payment-method-item::before {
+     content: '';
+     position: absolute;
+     top: -6px;
+     right: -6px;
+     width: 18px;
+     height: 18px;
+     border-radius: 50%;
+     background-color: var(--indigo-500);
+     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEwLjAwMDcgMTUuMTcwOUwxOS4xOTMxIDUuOTc4NTJMMjAuNjA3MyA3LjM5MjczTDEwLjAwMDcgMTcuOTk5M0wzLjYzNjcyIDExLjYzNTRMNS4wNTA5MyAxMC4yMjEyTDEwLjAwMDcgMTUuMTcwOVoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMSkiPjwvcGF0aD48L3N2Zz4=");
+     background-size: 12px;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+ .payment-method-item > img {
+     width: 100%;
+     height: 100%;
+     object-fit: contain;
+ }
+ .payment-form-group {
+     position: relative;
+     margin-bottom: 16px;
+ }
+ .payment-form-control {
+     outline: transparent;
+     border: 1px solid var(--gray-200);
+     border-radius: 8px;
+     padding: 24px 16px 8px 16px;
+     width: 100%;
+     transition: all .15s ease-in-out;
+ }
+ .payment-form-label {
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+     left: 16px;
+     color: var(--gray-400);
+     pointer-events: none;
+     transition: all .1s ease-in-out;
+ }
+ .payment-form-control:focus {
+     outline: 1px solid var(--indigo-500);
+     border-color: var(--indigo-500);
+ }
+ .payment-form-control:focus + .payment-form-label,
+ .payment-form-control:not(:placeholder-shown) + .payment-form-label {
+     top: 30%;
+     font-size: 12px;
+ }
+ .payment-form-label-required::after {
+     content: ' *';
+     color: var(--red-500);
+ }
+ .payment-form-group-flex {
+     display: flex;
+     align-items: center;
+ }
+ .payment-form-group-flex > * {
+     width: 100%;
+ }
+ .payment-form-group-flex > :not(:last-child) {
+     margin-right: 12px;
+ }
+ .payment-form-submit-button {
+     background-color: var(--indigo-500);
+     border-radius: 8px;
+     outline: transparent;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
+     border: none;
+     cursor: pointer;
+     color: var(--white);
+     font-weight: 600;
+     padding: 16px;
+     transition: all .15s ease-in-out;
+ }
+ .payment-form-submit-button:hover {
+     background-color: var(--indigo-600);
+ }
+ .payment-form-submit-button > i {
+     margin-right: 8px;
+ }
+ /* end: Payment */
+ 
+ 
+ 
+ /* start: Breakpoints */
+ @media screen and (max-width: 767px) {
+     .payment-wrapper {
+         grid-template-columns: 1fr;
+     }
+     .payment-content {
+         padding: 16px;
+     }
+     .payment-content::before {
+         top: 16px;
+         width: calc(100% - 20px);
+     }
+     .payment-form-group-flex {
+         display: block;
+     }
+ }
+   </style>
+<section class="payment-section">
+  <div class="container">
+      <div class="payment-wrapper">
+          <div class="payment-left">
+              <div class="payment-header">
+                  <div class="payment-header-icon"><i class="ri-flashlight-fill"></i></div>
+                  <div class="payment-header-title">Order Summary</div>
+                  <p class="payment-header-description">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+              </div>
+              <div class="payment-content">
+                  <div class="payment-body">
+                      <div class="payment-plan">
+                          <div class="payment-plan-type">Pro</div>
+                          <div class="payment-plan-info">
+                              <div class="payment-plan-info-name">Professional Plan</div>
+                              <div class="payment-plan-info-price">$49 per month</div>
+                          </div>
+                          <a href="#" class="payment-plan-change">Change</a>
+                      </div>
+                      <div class="payment-summary">
+                          <div class="payment-summary-item" id="costSection">
+                              <div class="payment-summary-name">Cost</div>
+                              
+                              <div class="payment-summary-price">$10<span id="cost" ></span></div>
+                          </div>
+                         <!-- <div class="payment-summary-item">
+                              <div class="payment-summary-name">Discount 20%</div>
+                              <div class="payment-summary-price">-$10</div>
+                          </div>-->
+                          <div class="payment-summary-divider"></div>
+                          <div class="payment-summary-item payment-summary-total">
+                              <div class="payment-summary-name">Total</div>
+                              <div class="payment-summary-price">$10</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="payment-right">
+              <form  method="POST" class="payment-form" action="{% url 'reservation' %}">
+                {% csrf_token %}
+                  <h1 class="payment-title">Payment Details</h1>
+                  <div class="payment-method">
+                      <input type="radio" name="payment-method" id="method-1" checked>
+                      <label for="method-1" class="payment-method-item">
+                          <img src="images/visa.png" alt="">
+                      </label>
+                      <input type="radio" name="payment-method" id="method-2">
+                      <label for="method-2" class="payment-method-item">
+                          <img src="images/mastercard.png" alt="">
+                      </label>
+                      <input type="radio" name="payment-method" id="method-3">
+                      <label for="method-3" class="payment-method-item">
+                          <img src="images/paypal.png" alt="">
+                      </label>
+                      <input type="radio" name="payment-method" id="method-4">
+                      <label for="method-4" class="payment-method-item">
+                          <img src="images/stripe.png" alt="">
+                      </label>
+                  </div>
+                  <div class="payment-form-group-flex">
+                    <div class="payment-form-group">
+                        <input type="text" placeholder=" " class="payment-form-control" id="expiry-date">
+                        <label for="expiry-date" class="payment-form-label payment-form-label-required">Name</label>
+                    </div>
+                    <div class="payment-form-group">
+                        <input type="number"  id="tickets" name="tickets" min="1" placeholder=" " class="payment-form-control" >
+                        <label for="tickets" class="payment-form-label payment-form-label-required"> Number of tickets</label>
+                    </div>
+                </div>
+                <div class="payment-form-group">
+                  <select type="text" placeholder=" " class="payment-form-control" id="card-number">  
+                    {% for space in spaces %}
+                    <option value="{{ space.id }}">{{ space.day }} -- {{space.start_time}} - {{space.end_time}}</option>
+                    {% endfor %}
+                  </select>
+                  <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
+              </div>
+                  <div class="payment-form-group">
+                      <input type="email" placeholder=" " class="payment-form-control" id="email">
+                      <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
+                  </div>
 
-.bg-pink .text{
-  border-color: aqua;
-  color: white;
-  background-color: rgb(255,0,126);
-}
+                  <div class="payment-form-group">
+                      <select type="text" placeholder=" " class="payment-form-control" id="card-number">  
+                        {% for service in services %}
+                        <option value="{{ service.id }}" data-cost="{{ service.price }}">{{ service.name }}</option>
+                        {% endfor %}
+                       </select>
+                      <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
+                  </div>
+                  <div class="payment-form-group">
+                    <input type="number" placeholder=" " class="payment-form-control" id="email">
+                    <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
+                </div>
+              
+                  <button type="submit" class="payment-form-submit-button"><i class="ri-wallet-line"></i> Pay</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</section>
 
-
-#navbarText{
-  color: white;
-}
-
-.navbar-brand{
-  color: white;
-} */
-
-    body {
-      margin-top: 60px;
-      /* Ajusta este valor al tamaño de tu barra de navegación */
-    }
-
-    .bg-pink {
-      border-color: aqua;
-      color: white;
-      background-color: rgba(255, 0, 126, 100);
-    }
-
-    .navbar {
-      background-color: rgb(255, 0, 126);
-      flex-shrink: 0;
-
-      /* Esto asegura que la barra de navegación siempre esté en la parte superior */
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-    }
-
-    .navbar-brand,
-    .navbar-nav .nav-link {
-      color: white;
-    }
-
-    .navbar-toggler {
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    }
-
-    .navbar-nav .active>.nav-link,
-    .navbar-nav .nav-link.active,
-    .navbar-nav .nav-link.show,
-    .navbar-nav .show>.nav-link {
-      color: white;
-    }
-
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link:focus {
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-
-    .container {
-      display: flex;
-    }
-
-    .sidebar {
-      flex: 0 0 200px;
-      /* Esto establece el ancho de la barra lateral */
-      padding: 20px;
-      border-right: 1px solid #ddd;
-      /* Esto agrega una línea entre la barra lateral y el contenido */
-    }
-
-    .content {
-      flex-grow: 1;
-      /* Esto hace que el contenido ocupe el espacio restante */
-      padding: 20px;
-    }
-
-    /* Estilo para el contenedor principal */
-    #content {
-      display: flex;
-      justify-content: center;
-      /* Centra horizontalmente */
-      align-items: center;
-      /* Centra verticalmente */
-      height: 100vh;
-      /* O ajusta según sea necesario */
-    }
-
-    .card {
-      background-color: rgb(255, 255, 255);
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 100%;
-      border-color: transparent;
-      /* Asegúrate de que .card tenga una altura definida */
-
-    }
-
-    .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      /* Ajusta este valor al tamaño de relleno que desees */
-      height: 100%;
-      /* Asegúrate de que .card-body tenga una altura definida */
-    }
-
-    .card-img-top {
-      max-width: 33.33%;
-      /* Limita el ancho máximo al 33.33% del ancho de la tarjeta */
-      height: auto;
-      /* Mantiene la relación de aspecto de la imagen */
-      display: block;
-      /* Asegura que la imagen se muestre como un bloque */
-      margin: 0 auto;
-      /* Centra la imagen horizontalmente */
-    }
-
-    .reservationButton {
-      background-color: rgb(255, 0, 126);
-      color: antiquewhite;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="container mt-5">
-    <div class="w-full max-w-xs mx-auto mt-5">
-      <form method="post" action="{% url 'reservation' %}">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required
-            value="{{form.name.value|default:''}}">
-        </div>
-        <hr>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required
-            value="{{form.email.value|default:''}}">
-        </div>
-        <div class="form-group">
-          <label for="phone_number">Phone Number</label>
-          <input type="tel" class="form-control" id="phone_number" name="phone_number"
-            placeholder="Enter your phone number" required value="{{form.phone_number.value|default:''}}">
-        </div>
-        <hr>
-        <div class="form-group">
-          <label for="class_space">Space</label>
-          <select class="form-control" id="class_space" name="class_space" required>
-            {% for space in spaces %}
-            <option value="{{ space.id }}">{{ space.day }} -- {{space.start_time}} - {{space.end_time}}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <hr>
-        <div class="form-group">
-          <label for="service">Class service</label>
-          <select class="form-control" id="service" name="service" required>
-            {% for service in services %}
-            <option value="{{ service.id }}" data-cost="{{ service.price }}">{{ service.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="tickets">Ticket amount</label>
-          <input type="number" class="form-control" id="tickets" name="tickets" min="1" placeholder="Enter the number of tickets" required>
-        </div>
-        <hr>
-        <div id="costSection" style="display: none;">
-          <h5>Cost: $<span id="cost"></span> USD</h5>
-        </div>
-        <hr>
-
-        <button type="submit" class="btn btn-primary">Confirm</button>
-      </form>
-    </div>
   </div>
 
   <script>
@@ -247,6 +738,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
     crossorigin="anonymous"></script>
-</body>
 
-</html>
+
+{%endblock%}
