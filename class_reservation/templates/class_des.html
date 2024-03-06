@@ -1,32 +1,69 @@
 {% extends "index.html" %}
 {% load static %}
-{%block content%}
-<div style="width: 100%;">
-    <p style="text-align: center; padding-top: 60px; padding-bottom: 10px;">Fri, Feb 16  |  Los Angeles</p>
-    <h2 style="text-align: center; font-weight: 900;">VALENTINE'S DAY TIRAMISU CLASS 💘</h2>
-    <p style="text-align: center; padding-top: 15px;">Want to do something fun for Valentine's Day? Join our cooking class and learn 
-         <br>the secrets of making Tiramisu from scratch! This class is suitable for vegetarians</p>
-       <a href="{% url 'reservation' %}">  <button style="color: white; background-color: pink; border: none; padding: 20px; margin-top: 40px; align-items: center; margin: auto; margin-left: 45%;"> GET TICKETS </button> <a>
+{% block content %}
+<style>
+    .container {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .event-info {
+        margin-left: 10%;
+        font-weight: bold;
+        text-align: left;
+        margin-top: 50px;
+    }
+    .event-description {
+        text-align: left;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 40px;
+    }
+    .event-image {
+        margin: auto;
+        padding-top: 10px;
+        max-width: 100%;
+        height: auto;
+    }
+    @media only screen and (max-width: 600px) {
+        .event-info {
+            margin-left: 5%;
+        }
+    }
+</style>
 
-        <img style="margin: auto auto ; padding-top: 10px"  src="https://static.wixstatic.com/media/3b9bbb_a57152ee7ebc461e90af8b9089370e07~mv2.jpg/v1/fill/w_979,h_552,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto/3b9bbb_a57152ee7ebc461e90af8b9089370e07~mv2.jpg" alt="">
+<div class="container">
+    <p style="padding-top: 60px; padding-bottom: 10px;">Fri, Feb 16  |  Los Angeles</p>
+    <h2 style="font-weight: bold;">VALENTINE'S DAY TIRAMISU CLASS 💘</h2>
+    <p style="text-align: center; padding-top: 15px; max-width: 80%; margin: 0 auto;">Want to do something fun for Valentine's Day? Join our cooking class and learn the secrets of making Tiramisu from scratch! This class is suitable for vegetarians</p>
+    
+    <div class="button-container">
+        <a href="{% url 'reservation' %}">
+            <button style="color: white; background-color: pink; border: none; padding: 15px 30px 15px 30px;">GET TICKETS</button>
+        </a>
+    </div>
+    
+    <img class="event-image" src="https://static.wixstatic.com/media/3b9bbb_a57152ee7ebc461e90af8b9089370e07~mv2.jpg/v1/fill/w_979,h_552,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto/3b9bbb_a57152ee7ebc461e90af8b9089370e07~mv2.jpg" alt="">
+    
+    <div class="event-info">
+        <h3 >DATE & TIME</h3>
+        <div>
+          <p>Mar 16, 2024, 5:00 PM – 7:00 PM PDT</p>
+          <p>Playa Vista, 12665 Village Ln, Playa Vista, CA 90094, USA</p>   
+        </div>
+       
+        <h3 >EVENT DETAILS</h3>
+        <p class="event-description" >sdasdasdaasdkajsdkjajdskadkjaksdadjs adas da sdjaldnlasdklandl</p>
+        <h3 style="margin-top:40px;">Ticket Policy  </h3>
+        <p>Classes are non refundable. If you can no longer make your class, you are able to modify the date/time of the booking, up to 72 hours prior to the event, or can transfer your ticket to a friend. After 72 hours, refund, exchanges or modifications are not accepted.</p>
 
-      </div>
+        <p style=" font-weight: bold; text-decoration:underline;">About MEXICANSALSAS</p>
 
+        <P></P>
+    </div>
+</div>
 
-
-<p style="font-weight: bold; margin-left: 20%;">FECHA Y HORA</p>
-
-
-<p>DETALLLES DEL EVENTO </p>
-
-<p>sdasdasdaasdkajsdkjajdskadkjaksdadjs adas da sdjaldnlasdklandl </p>
-
-
-<p>Ticket Policy</p>
-
-<p>Classes are non refundable. If you can no longer make your class, you are  able to modify the date/time of the booking, up to 72 hours prior to the event, or can transfer your ticket to a friend. After 72 hours, refund, exchanges or modifications are not accepted.</p>
-
-
-
-{%endblock%}
- 
+{% endblock %}
