@@ -2,6 +2,10 @@
 {% load static %}
 
 
+
+{%block content%}
+
+
 <style>
   .card-container {
       display: flex;
@@ -132,11 +136,55 @@
       background-color: pink;
       color: #fff;
     }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .split {
+        display: flex;
+        width: 100%;
+        height: 50vh;
+        overflow: hidden;
+    }
+    .half {
+        width: 50%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .half img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+    }
+    .button-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .button {
+        padding: 10px 20px;
+        background-color: pink;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 0 10px;
+    }
 </style>
-{%block content%}
-
-
-
 
 <section id="modalSection">
 
@@ -176,24 +224,27 @@
 {% endif %}
     
  
-      <section id="services" href="#services" style="padding:40px ;">
-        <h3 class="midle_title">SELECCIONA TU CIUDAD Y DESCUBRE</h3>
-        <h3 class="midle_title">TODAD LAS CLASES DE COCINA</h3>
-        <h3 class="midle_title" style="margin-bottom: 20px;">QUE ESTAN OCURRIENDO EN TU CIUDAD</h3>
-
-        <p>Welcome to the one stop shop for cooking classes! <br>
-
-          We currently produce our own cooking classes in Los Angeles, NYC, and SF, and partner up with amazing hosts who curate workshops <br> around the country. Our goal is to become your landing page for high quality, sustainability-focused and super fun cooking classes <br> around the country. Whether you're a group of friends or you're looking for couple cooking class ideas, we've got you covered.</p>
     
-        <div class="public_city_container">
-           
-            <a class="public_city" href="#">MEXICO CITY</a>
-            <a class="public_city" href="#">ONLINE CLASSES</a>
-            
-        </div>
-   
-    
-    
+<div class="container">
+  <div class="split">
+      <div class="half">
+          <img src="https://via.placeholder.com/600x400" alt="CDMX">
+          <div class="text-overlay">
+              <h2>CDMX</h2>
+          </div>
+      </div>
+      <div class="half">
+          <img src="https://via.placeholder.com/600x400" alt="Worldwide">
+          <div class="text-overlay">
+              <h2>Worldwide</h2>
+          </div>
+      </div>
+  </div>
+  <div class="button-container">
+      <button class="button" onclick="location.href='#'">In person</button>
+      <button class="button" onclick="location.href='#'">Online</button>
+  </div>
+</div>
        
 
 <div class="card-container" style="display: flex; flex-direction: column; width: 120px; margin: 0px 150px; height: 500px">

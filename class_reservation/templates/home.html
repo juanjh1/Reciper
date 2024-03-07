@@ -55,7 +55,7 @@
       height: auto;
     }
     .carousel-control-prev, .carousel-control-next {
-      background: transparent;
+      background: transparent ;
       z-index: 1;
     }
     .carousel-control-prev-icon, .carousel-control-next-icon {
@@ -65,6 +65,80 @@
     }
     .carousel-indicators {
       bottom: 10px;
+    }
+
+    #opiniones-carousel {
+      overflow: hidden;
+      width: 100%;
+      height: 100px;
+      position: relative;
+      margin-top: 0px;
+    }
+
+    .opiniones-slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    .opiniones-slide img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .opiniones-text {
+      color: #fff;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .split {
+        display: flex;
+        width: 100%;
+        height: 50vh;
+        overflow: hidden;
+    }
+    .half {
+        width: 50%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    .half img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+    }
+    .button-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .button {
+        padding: 10px 20px;
+        background-color: pink;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 0 10px;
     }
 
 
@@ -78,47 +152,35 @@
 
 <!-- Barra sobre el video -->
 <div class="overlay-bar">
-  <h2 style="color: black; font-weight:bold;" >BOOK A PRIVATE
-    COOKING PARTY</h2>
-  <a href="#">HOST YOUR NEXT VIRTUAL OR IN PERSON COOKING CLASS >></a>
+  <h2 style="color: black; font-weight:bold;" >Let’s cook together</h2>
+  <a href="#" class="btn btn-primary" style="background-color: pink;">Check availability</a>
+
 </div>
 
 
-<section id="services" href="#services" style="padding:40px ;">
-
-  <div class="public_city_container">
-     
-      <a class="public_city" href="#">MEXICO CITY</a>
-      <a class="public_city" href="#">ONLINE CLASSES</a>
-      
-  </div>
-  
-<div class="card-container" style="display: flex; flex-direction: column; width: 120px; margin: 0px 150px; height: 500px">
-  {% for service in services %}
-      <div class="card"style="border: 1px black solid">
-          <!-- Service Image -->
-          <img style="width:300px ; height: 250px; object-fit: cover;" src="{{ service.picture.url }}" alt="{{ service.name }} Image">
-
-          <div class="overlay" style="margin-top: 10px;">
-            <p class="card-title" style="font-weight: bold; font-size: 20px;">{{ service.name }}</p>
-
-              <!-- Service Location -->
-              <p>{{ service.location }}</p>
-              
-               <!-- Service Description -->
-               <p class="card-text">{{ service.description }}</p>
-
-               <!-- Service Price 
-               <p class="card-text"><strong>Price:</strong> ${{ service.price }}</p>-->
+    
+<div class="container">
+  <div class="split">
+      <div class="half">
+          <img src="https://via.placeholder.com/600x400" alt="CDMX">
+          <div class="text-overlay">
+              <h2>CDMX</h2>
           </div>
-          <div><a type="btn" href="{% url  'service' id=service.id %}" style="color: white; background: pink; padding: 20px 20px; font-weight: 900;">BUY TICKETS</a></div>
-          {% endfor %}
-          <div class="caption" style="display: none;">Selecciona una ciudad para ver las clases.</div>
-       
       </div>
-     
+      <div class="half">
+          <img src="https://via.placeholder.com/600x400" alt="Worldwide">
+          <div class="text-overlay">
+              <h2>Worldwide</h2>
+          </div>
+      </div>
+  </div>
+  <div class="button-container">
+      <button class="button" onclick="location.href='#'">In person</button>
+      <button class="button" onclick="location.href='#'">Online</button>
+  </div>
 </div>
-<div class="pink-bar"></div>
+       
+
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -143,6 +205,43 @@
 </div>
 </section>
 
+<div id="opiniones-carousel" style="background-color: rgb(54, 54, 54); color: white; text-align: center; height: 200px; position: relative;">
+  <button style="background-color: rgb(54, 54, 54); border: none; position: absolute; top: 50%; left: 40px; transform: translateY(-50%); font-size: 40px;" id="anterior-btn"><i style="color: white; background-color: rgb(54, 54, 54);" class="fa fa-solid fa-chevron-left"></i></button>
+  <h2 id="opinion-1" style="display: block; margin-top: 80px; font-size: 20px;">
+      <span style="font-style: italic;">- Juan Pérez:</span> "Me gustó mucho la clase, está muy rica la comida"</h2>
+  <h2 id="opinion-2" style="display: block; margin-top: 80px; font-size: 20px;">
+        <span style="font-style: italic;">- Juan Pérez:</span> "Me gustó mucho la clase, está muy rica la comida"</h2>
+  <h2 id="opinion-3" style="display: block; margin-top: 80px; font-size: 20px;">
+          <span style="font-style: italic;">- Juan Pérez:</span> "Me gustó mucho la clase, está muy rica la comida"</h2>
+  <!-- Agrega más opiniones según sea necesario -->
+  <button style="background-color: rgb(54, 54, 54); border: none; position: absolute; top: 50%; right: 40px; transform: translateY(-50%); font-size:40px;" id="siguiente-btn"><i style="color: white; background-color: rgb(54, 54, 54);" class="fa fa-solid fa-chevron-right"></i></button>
+</div>
+<div class="container-fluid" style="display: flex; background-color: #f5f5f5; padding: 20px;">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="https://static.wixstatic.com/media/b8cbe3_fd6d4833d3034ed1a26d6e962b7112a0~mv2.jpg/v1/fill/w_809,h_627,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/b8cbe3_fd6d4833d3034ed1a26d6e962b7112a0~mv2.jpg" alt="Cooking Class Image" style="width: 100%; object-fit: cover;">
+    </div>
+    <div class="col-md-6" style="display: flex; align-items: center;">
+      <div style="text-align: center;">
+        <h4 style="font-weight: bold;">About Natalia Luna</h4>
+        <p style="text-align: justify;">
+          I’m a Mexican Chef with a lifelong passion for food, especially hot and spicy dishes. I’ve had the opportunity to live all around Mexico, from the north to the south, coast to coast. <br>
+          I’ve always been in the kitchen, cooking with and for both local and foreign palates, and that’s how I’ve learned most of my recipes. Additionally, I pursued studies at the National School of Mexican Gastronomy and L’Académie Culinaire de France. This journey began at Airbnb, where I rapidly became one of the top-rated experiences worldwide.  <br>
+          My success was such that soon I realized that I needed to take Mexican Salsas Experience further. Now you can take my cooking classes anywhere in the world in Spanish, English and French.
+          <br> I’ve collaborated with companies such as TikTok, Coca-Cola, Facebook, Spotify and many more. My guests frequently come back, refer me to friends, family and coworkers. We are a community that loves Mexican food and shares tips and
+          recipes. <br>
+          My cooking classes have garnered over 1k 5-star reviews and have been listed
+          among the 20 Best cooking experiences in Latin America by Buzzfeed.
+          It would be my joy to share my love for Mexican food with you.
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -157,6 +256,63 @@
     });
   });
 </script>
+
+<script>
+  $(document).ready(function(){
+      var currentOpinion = 1;
+      var totalOpinions = $("h2[id^='opinion-']").length;
+      var intervalId;
+
+      // Mostrar la primera opinión
+      $("#opinion-1").css("display", "block");
+
+      // Función para cambiar de opinión
+      function changeOpinion(direction) {
+          $("h2[id^='opinion-']").css("display", "none");
+          if (direction === "next") {
+              currentOpinion = currentOpinion < totalOpinions ? currentOpinion + 1 : 1;
+          } else {
+              currentOpinion = currentOpinion > 1 ? currentOpinion - 1 : totalOpinions;
+          }
+          $("#opinion-" + currentOpinion).css("display", "block");
+      }
+
+      // Funciones para navegar por el carrusel
+      $("#anterior-btn").click(function(){
+          changeOpinion("prev");
+      });
+
+      $("#siguiente-btn").click(function(){
+          changeOpinion("next");
+      });
+
+      // Función para iniciar el carrusel automático
+      function startCarousel() {
+          intervalId = setInterval(function() {
+              changeOpinion("next");
+          }, 2000);
+      }
+
+      // Función para detener el carrusel automático
+      function stopCarousel() {
+          clearInterval(intervalId);
+      }
+
+      // Iniciar el carrusel automático al cargar la página
+      startCarousel();
+
+      // Detener el carrusel automático al pasar el mouse sobre el carrusel
+      $(".opinion").hover(
+          function() {
+              stopCarousel();
+          },
+          function() {
+              startCarousel();
+          }
+      );
+  });
+</script>
+
 
 
 {% endblock %}
