@@ -2,6 +2,17 @@ from django.contrib import admin
 from django.urls import include, path
 from django.shortcuts import redirect, render
 
+from django.contrib.auth.decorators import user_passes_test
+
+# Función para verificar si el usuario es superusuario
+def is_superuser(user):
+    return user.is_superuser
+
+# Decorador para restringir el acceso a las vistas solo a superusuarios
+def superuser_required(view_func):
+    return user_passes_test(lambda user: is_superuser(user))(view_func)
+
+
 from payment.views import payment_failed, payment_successful, payment_cancelled
 from .views import user_reservation_view, payment_reservation_view
 
@@ -42,19 +53,17 @@ def home_view(request):
 def panel_view(request):
     return render(request, "panel/panel.base.html")
 
-
 panel_urlpatterns = [
-    path("", panel_view, name="panel"),
-    path("calendar", calendar_panel_view, name="calendar"),
-    path("calendar/space", add_class_space_view, name="add_class_space"),
-    path(
-        "calendar/space/edit/<int:id>", edit_class_space_view, name="edit_class_space"),
-    path("reservations", reservations_panel_view, name="reservations"),
-    path("reservations/edit/<int:id>", edit_reservation_view, name="edit_reservation"),
-    path("payments", payments_panel_view, name="payments"),
-    path("services", services_panel_view, name="services"),
-    path("services/add", add_service_view, name="add_service"),
-    path("services/edit/<int:service_id>", edit_service_view, name="edit_service"),
+    path("", superuser_required(panel_view), name="panel"),
+    path("calendar", superuser_required(calendar_panel_view), name="calendar"),
+    path("calendar/space", superuser_required(add_class_space_view), name="add_class_space"),
+    path("calendar/space/edit/<int:id>", superuser_required(edit_class_space_view), name="edit_class_space"),
+    path("reservations", superuser_required(reservations_panel_view), name="reservations"),
+    path("reservations/edit/<int:id>", superuser_required(edit_reservation_view), name="edit_reservation"),
+    path("payments", superuser_required(payments_panel_view), name="payments"),
+    path("services", superuser_required(services_panel_view), name="services"),
+    path("services/add", superuser_required(add_service_view), name="add_service"),
+    path("services/edit/<int:service_id>", superuser_required(edit_service_view), name="edit_service"),
 ]
 
 payment_urlpatterns = [

@@ -7,65 +7,7 @@
 
 
 <style>
-  .card-container {
-      display: flex;
-      flex-wrap: wrap;
-  }
 
-  .card {
-      position: relative;
-      overflow: hidden;
-      margin: 10px;
-      width: 250px;
-      transition: transform 0.3s;
-  }
-
-  .card:hover {
-      transform: translateY(-50%);
-  }
-
-  .card img {
-      width: 100%;
-      height: auto;
-      transition: transform 0.3s;
-  }
-
-  .card:hover img {
-      transform: translateY(-100%);
-  }
-
-  .card .overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-      opacity: 1;
-      transition: opacity 0.3s;
-  }
-
-  .card:hover .overlay {
-      opacity: 0;
-  }
-
-  .card-body {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.9);
-      transition: transform 0.3s;
-  }
-
-  .card:hover .card-body {
-      transform: translateY(-100%);
-  }
 
   .communication-button {
             position: fixed;
@@ -240,10 +182,7 @@
           </div>
       </div>
   </div>
-  <div class="button-container">
-      <button class="button" onclick="location.href='#'">In person</button>
-      <button class="button" onclick="location.href='#'">Online</button>
-  </div>
+
 </div>
        
 

@@ -6,11 +6,9 @@
     /* Estilos CSS aquí */
     #calendar {
         max-width: 800px;
-        margin: 0px 20px;
+        margin: 20px auto;
         padding: 20px;
         background-color: #fff;
-     
-      
     }
 
     header {
@@ -19,10 +17,6 @@
         align-items: center;
         margin-bottom: 20px;
     }
-    .weekday {
-        background-color: #98FF98;
-        border:1px solid white;
-    }
 
     table {
         width: 100%;
@@ -30,25 +24,24 @@
     }
 
     th, td {
-        padding: 8px;
+        padding: 10px;
         text-align: center;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     th {
-        background-color:white;
-        color: rgb(213, 213, 213);
-      
+        background-color: #f8b9c2; /* Rosado */
+        color: #fff;
+        font-weight: bold;
     }
 
     td {
-        
         transition: background-color 0.3s;
-        width: 14.28%; /* Ajuste para 7 columnas en una fila */
+        width: 14.28%;
     }
 
     td:hover {
-        background-color: #f2f2f2;
+        background-color: #f9e3e5; /* Rosado claro */
         cursor: pointer;
     }
 
@@ -58,42 +51,98 @@
     }
 
     .appointment {
-        background-color: pink;
+        background-color: #ff7b9c; /* Rosado más oscuro */
         color: #fff;
         font-weight: bold;
-        padding: 2px;
-        border-radius: 2px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin: 5px 0;
+        cursor: pointer; /* Agregamos cursor pointer para indicar que es interactivo */
     }
 
     .schedule {
-        margin-top: 20px;
+        margin-left: 20px;
+        flex: 1;
+        padding-left: 20px;
+        border-left: 1px solid #f8b9c2; /* Línea vertical rosada */
+    }
+
+    .schedule h4 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #f8b9c2; /* Rosado */
+    }
+
+    /* Estilos para el modal */
+    .modal {
+        display: none; /* Ocultamos el modal por defecto */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
     }
 </style>
 
-<div class="content" style="background-color: rgb(228, 228, 228); width: 100%; height: 100%; align-items: center;">
-
-    <div class="" style="color: black; width: 85%;  background-color:white;  margin: 0px auto;">
-
-        <div style="margin: 20px; padding-top: 20px;"> <a href="{% url 'home' %}"> <i class=" fa fa-solid fa-chevron-left"></i> Back</a ></div>
-
-        <h2 style="margin: 20px; margin-top: 40px; font-weight: 900;"> Private Cooking Class - Holiday Special</h2>
-        <p style="margin-left: 20px;">Ready to talk now? Call us at +1 (213) 123-1234.</p>
-    
-        {% for space in class_spaces %}
-    {{space.day }}
-    {{space.start_time }}
-    {{space.end_time }}
-    {{space.space_type }}
-        {% endfor %}
-        <hr style="width: 95%; border:0.3px solid black; margin: auto;">
-        <h3 style="margin-left: 20px; margin-top: 40px; font-weight: 900; font-size: 20px;">Select a Date and Time</h3>
-        <hr style="width: 60%; border:0.3px solid black; margin-left: 20px;">
-        <div id="calendar" style="display: flex; ">
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{% url 'home' %}" class="btn btn-primary mb-3"><i class="fa fa-chevron-left"></i> Back</a>
+                <h2 class="mb-4">Private Cooking Class - Holiday Special</h2>
+                <p>Ready to talk now? Call us at +1 (213) 123-1234.</p>
+                
+                <hr>
+                
+                <h3 class="mt-4 mb-3">Select a Date and Time</h3>
+                
+                <div id="calendar"></div>
+                
+               
+            </div>
         </div>
-
     </div>
-
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <!-- Contenido del modal -->
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h4>Reservar Cita</h4>
+        <form>
+            <label for="appointmentTime">Hora seleccionada:</label>
+            <input type="text" id="appointmentTime" name="appointmentTime" readonly>
+            <button type="submit">Reservar</button>
+        </form>
+    </div>
+</div>
+
 
 <script type="text/javascript">
 
@@ -291,5 +340,22 @@
     
     
     renderCalendar();
+</script>
+
+
+<script type="text/javascript">
+    // Función para abrir el modal
+    function openModal(time) {
+        var modal = document.getElementById("myModal");
+        var appointmentTimeInput = document.getElementById("appointmentTime");
+        appointmentTimeInput.value = time;
+        modal.style.display = "block";
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
 </script>
 {% endblock %}
