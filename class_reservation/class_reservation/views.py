@@ -12,7 +12,7 @@ from payment.models import ReservationPayment
 from utils.mailers import email_admin
 
 
-def user_reservation_view(request):
+def user_reservation_view(request, id ):
     """
     View to allow users to make a reservation completing the
     reservation form.
@@ -39,9 +39,32 @@ def user_reservation_view(request):
     return render(
         request,
         "reservation_form.html",
-        {"form": form, "services": services, "spaces": spaces_available},
+        {"form": form, "service": Service.objects.filter(id=id).first(), "spaces": spaces_available},
     )
 
+def reservation_post( request):
+    services = Service.objects.all()
+    # Filter spaces available in the future
+    spaces_available = ClassSpaceModel.objects.filter(
+        space_type="ONLINE", day__gte=datetime.date.today()
+    )
+    if request.method == "POST":
+        form = ReservationForm(request.POST)
+        # breakpoint()
+        if form.is_valid():
+            form.save()
+            return redirect("reservation_payment", form.instance.id)
+        else:
+            print(form.errors)
+            return render(
+                request,
+                "reservation_form.html",
+                {"form": form, "services": services, "spaces": spaces_available},
+            )
+    else:
+    
+        form = ReservationForm()
+        
 
 def payment_reservation_view(request, reservation_id):
     """

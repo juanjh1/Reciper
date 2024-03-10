@@ -14,7 +14,7 @@ def superuser_required(view_func):
 
 
 from payment.views import payment_failed, payment_successful, payment_cancelled
-from .views import user_reservation_view, payment_reservation_view
+from .views import user_reservation_view, payment_reservation_view, reservation_post
 
 from panel.views import (
     add_class_space_view,
@@ -58,7 +58,7 @@ panel_urlpatterns = [
     path("calendar", superuser_required(calendar_panel_view), name="calendar"),
     path("calendar/space", superuser_required(add_class_space_view), name="add_class_space"),
     path("calendar/space/edit/<int:id>", superuser_required(edit_class_space_view), name="edit_class_space"),
-    path("reservations", superuser_required(reservations_panel_view), name="reservations"),
+    path("reservations/<int:id>", superuser_required(reservations_panel_view), name="reservations"),
     path("reservations/edit/<int:id>", superuser_required(edit_reservation_view), name="edit_reservation"),
     path("payments", superuser_required(payments_panel_view), name="payments"),
     path("services", superuser_required(services_panel_view), name="services"),
@@ -104,7 +104,8 @@ urlpatterns = [
     path("calendar", calendar_show_view, name="calendar_show"),
     path("register/", Register_view, name="register"),
     path("logout/", lambda request: redirect("panel:panel"), name="logout"),
-    path("reservation", user_reservation_view, name="reservation"),
+    path("reservation/<int:id>", user_reservation_view, name="reservation"),
+    path("reservation/pay", reservation_post, name="reservation_post"),
     path(
         "reservation/<int:reservation_id>/payment",
         payment_reservation_view,

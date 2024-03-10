@@ -1,19 +1,6 @@
 from django.db import models
 
 
-class Service(models.Model):
-    name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    description = models.TextField()
-    picture = models.ImageField(upload_to="pictures/")
-    location = models.CharField(max_length=200)
-    inicio = models.TimeField(blank=True, null=True)
-    fin = models.TimeField(blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.name} - {self.price}"
-
-
 # TODO: Implement as time block
 class ClassSpaceModel(models.Model):
     SPACE_TYPES = [
@@ -34,6 +21,22 @@ class ClassSpaceModel(models.Model):
 
     class Meta:
         app_label = "panel"
+
+
+class Service(models.Model):
+    name = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField()
+    space = models.ForeignKey(ClassSpaceModel, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to="pictures/")
+    location = models.CharField(max_length=200)
+    inicio = models.TimeField(blank=True, null=True)
+    fin = models.TimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.price}"
+
+
 
 
 class Reservation(models.Model):

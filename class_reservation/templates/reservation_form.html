@@ -643,8 +643,9 @@
                   </div>
               </div>
           </div>
+  
           <div class="payment-right">
-              <form  method="POST" class="payment-form" action="{% url 'reservation' %}">
+              <form  method="POST" class="payment-form" action="{% url 'reservation_post' %}">
                 {% csrf_token %}
                   <h1 class="payment-title">Payment Details</h1>
                   <div class="payment-method">
@@ -657,7 +658,7 @@
                   </div>
                   <div class="payment-form-group-flex">
                     <div class="payment-form-group">
-                        <input type="text" placeholder=" " class="payment-form-control" id="expiry-date">
+                        <input type="text" placeholder=" " class="payment-form-control" id="expiry-date" name="name">
                         <label for="expiry-date" class="payment-form-label payment-form-label-required">Name</label>
                     </div>
                     <div class="payment-form-group">
@@ -665,29 +666,30 @@
                         <label for="tickets" class="payment-form-label payment-form-label-required"> Number of tickets</label>
                     </div>
                 </div>
-                <div class="payment-form-group">
-                  <select type="text" placeholder=" " class="payment-form-control" id="card-number">  
-                    {% for space in spaces %}
-                    <option value="{{ space.id }}">{{ space.day }} -- {{space.start_time}} - {{space.end_time}}</option>
-                    {% endfor %}
-                  </select>
-                  <label for="card-number" class="payment-form-label payment-form-label-required">Space</label>
-              </div>
+             
+              <div class="payment-form-group">
+                <select type="text" placeholder=" " class="payment-form-control" id="card-number"  name="class_space">  
+                 
+                  <option value="{{ service.space.id }}">{{ service.space.day }} -- {{service.space.start_time}} - {{service.space.end_time}} </option>
+                  
+                </select>
+                <label for="card-number" class="payment-form-label payment-form-label-required">Space</label>
+            </div>
                   <div class="payment-form-group">
-                      <input type="email" placeholder=" " class="payment-form-control" id="email">
+                      <input type="email" placeholder=" " class="payment-form-control" id="email" name="email">
                       <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
                   </div>
 
                   <div class="payment-form-group">
-                      <select type="text" placeholder=" " class="payment-form-control" id="card-number">  
-                        {% for service in services %}
+                      <select type="text" placeholder=" " class="payment-form-control" id="card-number"   name="service">  
+                       
                         <option value="{{ service.id }}" data-cost="{{ service.price }}">{{ service.name }}</option>
-                        {% endfor %}
+                      
                        </select>
                       <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
                   </div>
                   <div class="payment-form-group">
-                    <input type="number" placeholder=" " class="payment-form-control" id="phone">
+                    <input type="number" placeholder=" " class="payment-form-control" id="phone"   name="phone_number">
                     <label for="phone" class="payment-form-label payment-form-label-required">Phone Number</label>
                 </div>
               
@@ -701,26 +703,23 @@
   </div>
 
   <script>
-    var serviceSelect = document.getElementById('service');
     var ticketsInput = document.getElementById('tickets');
     var costElement = document.getElementById('cost');
-    var costSection = document.getElementById('costSection');
+    var totalElement = document.querySelector('.payment-summary-total .payment-summary-price');
 
     function updateCost() {
-      var selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
-      var serviceCost = Number(selectedOption.getAttribute('data-cost'));
-      var ticketAmount = Number(ticketsInput.value);
-      var totalCost = serviceCost * ticketAmount;
-      costElement.textContent = totalCost.toFixed(2);
-      costSection.style.display = 'block';
+        var serviceCost = parseFloat(costElement.textContent);
+        var ticketAmount = parseInt(ticketsInput.value) || 0; // Maneja el caso cuando no hay valor ingresado
+        var totalCost = serviceCost * ticketAmount;
+        totalElement.textContent = '$' + totalCost.toFixed(2);
     }
 
-    serviceSelect.addEventListener('change', updateCost);
-    ticketsInput.addEventListener('change', updateCost);
+    ticketsInput.addEventListener('input', updateCost);
 
-    // Call updateCost once at the start to show the initial cost
+    // Call updateCost once at the start to show the initial total
     updateCost();
-  </script>
+</script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

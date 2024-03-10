@@ -2,72 +2,129 @@
 {% load static %}
 {% block content %}
 <style>
+    /* CSS styles for enhanced appearance */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f8f9fa;
+    }
+
     .container {
-        width: 100%;
-        text-align: center;
+        max-width: 800px;
+        margin: auto;
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
     }
-    .event-info {
-        margin-left: 10%;
-        font-weight: bold;
-        text-align: left;
-        margin-top: 50px;
-    }
-    .event-description {
-        text-align: left;
-    }
-    .button-container {
+
+    .header {
         text-align: center;
-        margin-top: 30px;
-        margin-bottom: 40px;
+        margin-bottom: 50px;
     }
-    .event-image {
-        margin: auto;
-        padding-top: 10px;
+
+    h2 {
+        color: #343a40;
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+
+    li {
+        margin-bottom: 25px;
+    }
+
+    li i {
+        margin-right: 10px;
+        color: #007bff;
+        font-size: 20px;
+    }
+
+    .btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 30px;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 18px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .image-container {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .image {
         max-width: 100%;
-        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
-    @media only screen and (max-width: 600px) {
-        .event-info {
-            margin-left: 5%;
-        }
+
+    .activity {
+        background-color: #f1f1f1;
+        padding: 20px;
+        border-radius: 10px;
     }
 </style>
 
 <div class="container">
-    <h2 style="font-weight: bold;">Mexican Salsas Experience</h2>
-    <p>Hosted by Chef Natalia Luna</p>
-    <p>2.5 hours. Hosted in English, Spanish, and French</p>
-    <p>Great for groups & Team-Building</p>
-
-
-    <a href="{% url 'reservation' %}"> <button style="color: white; background-color: pink; border: none; padding: 20px; margin-top: 40px; align-items: center; margin: auto; margin-left: 45%;"> GET TICKETS </button> <a>
-    <div class="event-info">
-        <h3 >Experience Details</h3>
-        <ul>
-            <li>First stop, fresh market for ingredients</li>
-            <li>Next, hands-on instruction and taste-testing accompanied by all the agua de jamaica (hibiscus tea) you can handle</li>
-            <li>Once salsas are made, together we cook & eat quesadillas (as many as you want to eat)</li>
-            <li>Final touch because we know our audience: take home fresh salsa!</li>
-        </ul>
-
-        <p>We will meet at an ancient church located at the heart of Tacuba, which history goes way back before the Spanish arrived in America. Steps away is the Tacuba Market where we will buy our fresh ingredients.</p>
-        
-        <p>We will cook the salsas in the four traditional ways: raw, fried, boiled and roasted. All different in personality, flavor, chile and spicy level. You will be surprised how easy it is to cook salsa, at the same time we will prepare some quesadillas to eat with our salsas. Unlimited jamaica water included. At the end you will leave with a jar of salsa and new recipes to take home! When booking this experience you also support the local commerce.</p>
+    <div class="header">
+        <div class="image-container">
+            <img class="image" src="{% static 'mexican_cuisine.jpg' %}" alt="Mexican Cuisine">
+        </div>
+        <h2>Culinary Experiences in Mexico City</h2>
     </div>
-
-    <div class="button-container">
-        <!-- Agregar botones o íconos aquí -->
-        <p>Vegetarian and vegan options available</p>
-        <p>Top-Rated</p>
-        <p>Cancellation flexibility</p>
-    </div>
-
-    <div class="event-info">
-        <p>We are located north of Mexico City. About 25 minutes driving from Roma Norte, Condesa, Chapultepec Park and Centro Histórico, 8 minutes from Polanco.</p>
-        <p>Please consider this experience can be held in more than one language simultaneously. Our Kitchen is on the 1st floor (there’s no elevator) and shared with a scaredy cat. If you prefer a different time or day, we can arrange it! An open to public group is up to 10 people. An open to public group is up to 10 people. Private group is up to 30 people. Larger groups available: Contact (hipervinculo) If you prefer a different time or day, we can arrange it! Contact (hipervinculo)</p>
-    </div>
-</div>
+    <ul>
+        <li class="activity"><i class="fas fa-info-circle"></i><strong>Description:</strong> Display the screen divided into large photos with text on top. Clicking on each option should redirect to the full description of the experience.</li>
+        <li class="activity"><i class="fas fa-utensils"></i><strong>Activities:</strong>
+            <ul>
+                <li>Visit to the market for fresh ingredients.</li>
+                <li>Hands-on instruction and tasting.</li>
+                <li>Preparation and consumption of typical Mexican dishes.</li>
+            </ul>
+        </li>
+        <li class="activity"><i class="fas fa-language"></i><strong>Available Languages:</strong> English, Spanish, and French.</li>
+        <li class="activity"><i class="far fa-clock"></i><strong>Duration:</strong>
+            <ul>
+                <li>2.5 hours for most experiences.</li>
+                <li>Chilaquiles Experience: 90 minutes.</li>
+            </ul>
+        </li>
+        <li class="activity"><i class="fas fa-map-marker-alt"></i><strong>Location:</strong> All experiences take place in an ancient church in Tacuba.</li>
+        <li class="activity"><i class="fas fa-hand-holding"></i><strong>Includes:</strong>
+            <ul>
+                <li>Unlimited beverages (hibiscus tea, rice water, coffee, orange juice).</li>
+                <li>All necessary ingredients and materials.</li>
+                <li>Recipes to take home.</li>
+                <li>Vegan and vegetarian options available.</li>
+            </ul>
+        </li>
+        <li class="activity"><i class="fas fa-users"></i><strong>Groups:</strong>
+            <ul>
+                <li>Public up to 10 people.</li>
+                <li>Private up to 30 people.</li>
+            </ul>
+        </li>
+        <li class="activity"><i class="far fa-calendar-alt"></i><strong>Availability:</strong> Contact for details and reservations.</li>
+    </ul>
+    <a href="{% url 'reservation' id=service.id %}" class="btn"><button class="btn">Get Tickets</button>
+    </div></a>
 
 {% endblock %}

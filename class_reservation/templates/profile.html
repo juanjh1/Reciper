@@ -17,35 +17,15 @@
       <div class="card col-md-8 col-lg-6 mx-auto">
         <form method="POST" enctype="multipart/form-data" class="card-body" id="form_user">
           
-          <div class="text-center mb-4">
-            <img src="{{data.image.url}}" class="profile-img " alt="user image">
-            <div class="custom-file mt-3">
-              <input type="file" class="custom-file-input" name="image" accept="image/*" id="id_image" aria-label="HOLA">
-              <label class="custom-file-label" for="id_image">Cambiar imagen</label>
-            </div>
-            </div>
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <div class="form-group">
-                  <label for="id_first_name">Nombre</label>
-                  <input type="text" class="form-control" name="first_name" id="id_first_name" placeholder="Nombre" maxlength="15" value="{{request.user.first_name}}">
-                </div>
-              </div>
-              <div class="col-12 col-sm-6">
-                <div class="form-group">
-                  <label for="id_last_name">Apellido</label>
-                  <input type="text" class="form-control" name="last_name" id="id_last_name" placeholder="Apellido" maxlength="15" value="{{request.user.last_name}}">
-                </div>
-              </div>
-            </div>
+          
+            
             <div class="form-group">
               <label for="id_username">Nombre de Usuario</label>
-              <input type="text" class="form-control" name="username" id="id_username" value="{{data.user}}" minlength="5" maxlength="15" required>
+              <h1>{{user.number}}</h1>
+              <input type="text" class="form-control" name="username" id="id_username" value="{{user}}" minlength="5" maxlength="15" required>
             </div>
             <div class="form-group">
-              <label for="id_bio">Biografía</label>
-              <textarea class="form-control" name="bio" rows="5" maxlength="300" id="id_bio" placeholder="¡Dile a los demás quién eres!">{{data.bio}}</textarea>
-            </div>
+           
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="form-group">
@@ -56,75 +36,15 @@
               <div class="col-12 col-md-6">
                 <div class="form-group">
                   <label for="id_number">Número telefónico</label>
-                  <input type="number" class="form-control" name="number" id="id_number" required value="{{data.number}}" placeholder="Número telefónico">
+                  <input type="number" class="form-control" name="number" id="id_number" required value="{{user.number}}" placeholder="Número telefónico">
                 </div>
               </div>
             </div>
             <!-- Direcciones -->
-            <div class="row">
-              <div class="col-12">
-              
-                <div class="container">
-                  <div class="card mt-4">
-                    <div class="card-body">
-                      <h5 class="card-title text-center">Direcciones Guardadas</h5>
-                      <hr>
-                
-                      <div class="form-group text-center">
-                        <select class="form-control" style="width: 100%" readonly>
-                          
-                            <option>{{ x }}</option>
-                       
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+         
                 
                 
            
-                  <p class="w-100 text-center">Aún no tienes direcciones creadas</p>
-           
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="form-group mb-3">
-                  <label for="id_street">Calle/Av</label>
-                  <input type="text" name="street" class="form-control" placeholder="Calle/Av">
-                </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="form-group mb-3">
-                  <label for="id_postal_code">Código Postal</label>
-                  <input type="text" name="postal_code" class="form-control" placeholder="Código Postal">
-                </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="form-group mb-3">
-                  <label for="id_sector">Colonia</label>
-                  <input type="text" name="sector" class="form-control" placeholder="Colonia">
-                </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="form-group mb-3">
-                  <label for="id_home_number">N° de Casa/Apartamento</label>
-                  <input type="text" name="home_number" class="form-control" placeholder="N° de Casa/Apartamento">
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group mb-3">
-                  <label for="id_tips">Información Adicional</label>
-                  <input type="text" name="tips" class="form-control" placeholder="Información Adicional">
-                </div>
-              </div>
-            </div>
-            <!-- Fin de Direcciones -->
-            <div class="text-center mt-3">
-              <button type="submit" class="btn btn-primary" id="id_submit">Guardar Cambios</button>
-            </div>
-          </form>
-        </div>
-      </div>
-   
   
 </main>
 

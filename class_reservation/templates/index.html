@@ -239,6 +239,54 @@
     text-align: center;
 }
 
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.footer__content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer__logo img {
+    width: 200px;
+    height: auto;
+}
+
+.footer__info h3,
+.footer__social h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer__info p {
+    margin: 5px 0;
+}
+
+.footer__social ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer__social ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.footer__social ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.footer__copyright {
+    text-align: center;
+    margin-top: 20px;
+}
+
   </style>
   <!-- <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -382,6 +430,8 @@
   </div>
 </div>
 
+
+
 {%block content%}
 
 {%endblock%}
@@ -389,6 +439,35 @@
 
 </body>
 
+<footer class="footer">
+  <div class="footer__content">
+      <div class="footer__logo">
+          <iframe
+              width="100%"
+              height="300"
+              frameborder="0" style="border:0"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.9910853020885!2d-99.17904068472376!3d19.40512138690696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff6bb2b5d335%3A0x6c8b2fe5ab56c8a2!2sAntiguo%20convento%20de%20San%20Gabriel%2C%20Tacuba%2C%20M%C3%A9x.!5e0!3m2!1sen!2smx!4v1646928096356!5m2!1sen!2smx"
+              allowfullscreen>
+          </iframe>
+      </div>
+      <div class="footer__info">
+          <h3>Contacto</h3>
+          <p><i class="fa fa-solid fa-map-pin"></i> Av. Azcapotzalco 36, Tacuba, CDMX</p>
+          <p><i class=" fa fa-solid fa-phone"></i> +1 (442) 214-5866</p>
+          <p><i class="fa fa-solid fa-envelope"></i> mexicansalsasexperience@gmail.com</p>
+      </div>
+      <div class="footer__social">
+          <h3>Síguenos</h3>
+          <ul>
+              <li><a href="https://www.facebook.com/mexicansalsas/"><i class=" fa fa-brands fa-facebook"></i></a></li>
+              <li><a href="https://www.instagram.com/mexicansalsas/"><i class=" fa fa-brands fa-instagram"></i></a></li>
+          </ul>
+      </div>
+  </div>
+  <div class="footer__copyright">
+      <p>&copy; 2024 Cocina. Todos los derechos reservados.</p>
+  </div>
+</footer>
 
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

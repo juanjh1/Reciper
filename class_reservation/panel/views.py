@@ -141,13 +141,14 @@ def edit_service_view(request, service_id):
 # ------------------------
 
 
-def reservations_panel_view(request):
+def reservations_panel_view(request,id ):
     reservations = Reservation.objects.all()
 
-    return render(request, "panel/reservations.html", {"reservations": reservations})
+
+    return render(request, "panel/reservations.html", {"reservations": reservations, "service": Service.objects.filter(id=id).first()})
 
 
-def edit_reservation_view(request, id):
+def edit_reservation_view(request):
     reservation = Reservation.objects.get(id=id)
 
     return render(
@@ -290,10 +291,16 @@ def profile(request, id):
 
 
 def desc_service(request, id):
-
+     
     user = User.objects.filter(id=id).first()
 
-    return render(request, "class_des.html")
+    context ={
+
+        "service" : Service.objects.filter(id=id).first()
+    
+    }
+
+    return render(request, "class_des.html", context=context)
 
 
 # ------------------------
