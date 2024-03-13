@@ -1,82 +1,76 @@
 {% extends "index.html" %}
 {% load static %}
 
-
-
-{%block content%}
-
-
+{% block content %}
 <style>
+    .communication-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        transition: transform 0.3s;
+    }
 
+    .communication-button a {
+        display: flex;
+        align-items: center;
+        background-color: #25D366;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
 
-  .communication-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            transition: transform 0.3s;
-        }
+    .communication-button img {
+        width: 50px;
+        height: auto;
+        margin-right: 10px;
+    }
 
-        .communication-button a {
-            display: flex;
-            align-items: center;
-            background-color: #25D366;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .communication-button img {
-            width: 50px;
-            height: auto;
-            margin-right: 10px;
-        }
-
-        .pink-section {
-      background-color: pink;
-      width: 100%;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
+    .pink-section {
+        background-color: pink;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
     }
 
     h2 {
-      color: white;
+        color: white;
     }
 
     .promo-text {
-      color: white;
-      margin-top: 20px;
+        color: white;
+        margin-top: 20px;
     }
 
     .white-section {
-      background-color: #fff;
-      display: flex;
-      width: 80%;
-      margin: auto;
-      padding: 20px;
-      box-sizing: border-box;
-      margin-top: 20px;
+        background-color: #fff;
+        display: flex;
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+        box-sizing: border-box;
+        margin-top: 20px;
     }
 
     .white-section img {
-      max-width: 100%;
-      height: auto;
+        max-width: 100%;
+        height: auto;
     }
 
     .white-section button {
-      color: pink;
-      background-color: #fff;
-      border: 2px solid pink;
-      padding: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
+        color: pink;
+        background-color: #fff;
+        border: 2px solid pink;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
     }
 
     .white-section button:hover {
-      background-color: pink;
-      color: #fff;
+        background-color: pink;
+        color: #fff;
     }
 
     .container {
@@ -86,23 +80,27 @@
         justify-content: center;
         height: 100vh;
     }
+
     .split {
         display: flex;
         width: 100%;
         height: 50vh;
         overflow: hidden;
     }
+
     .half {
         width: 50%;
         height: 100%;
         position: relative;
         overflow: hidden;
     }
+
     .half img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
+
     .text-overlay {
         position: absolute;
         top: 50%;
@@ -111,11 +109,13 @@
         color: white;
         text-align: center;
     }
+
     .button-container {
         margin-top: 20px;
         display: flex;
         justify-content: center;
     }
+
     .button {
         padding: 10px 20px;
         background-color: pink;
@@ -129,178 +129,159 @@
 </style>
 
 <section id="modalSection">
-
-  <!-- Modal -->
-
-
-          </div>
-      </div>
-  </div>
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <h5 class="modal-title" id="exampleModalLabel">Ingresar</h5>
-            <!-- Contenido del segundo modal -->
-            <form action="/login" method="post">
-              <div class="container">
-                <h2>Login</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Login</button>
+    <!-- Modal -->
+    </div>
+    </div>
+    </div>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h5 class="modal-title" id="exampleModalLabel">Ingresar</h5>
+                <!-- Contenido del segundo modal -->
+                <form action="/login" method="post">
+                    <div class="container">
+                        <h2>Login</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Login</button>
+                        </form>
+                    </div>
                 </form>
-            </div> 
-            </form>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="content container-fluid">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="container">
+        <div class="split">
+            <div class="half">
+                <img src="https://via.placeholder.com/600x400" alt="CDMX" id="cdmx">
+                <div class="text-overlay">
+                    <h2>CDMX</h2>
+                </div>
+            </div>
+            <div class="half">
+                <img src="https://via.placeholder.com/600x400" alt="Worldwide" id="worldwide">
+                <div class="text-overlay">
+                    <h2>Worldwide</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for service in services %}
+    <div class="card {% if service.space_type == 'offline' %}offline{% else %}online{% endif %}" style="border: 1px black solid">
+        <!-- Service Image -->
+        <img style="width:300px ; height: 250px; object-fit: cover;" src="{{ service.picture.url }}" alt="{{ service.name }} Image">
+    
+        <div class="overlay" style="margin-top: 10px;">
+            <p class="card-title" style="font-weight: bold; font-size: 20px;">{{ service.name }}</p>
+           
+            <!-- Service Location -->
+            <p>{{ service.location }}</p>
+            <p>{{ service.space.space_type }}</p>
+    
+            <!-- Service Description -->
+            <p class="card-text">{{ service.description }}</p>
+    
+            <!-- Service Price 
+            <p class="card-text"><strong>Price:</strong> ${{ service.price }}</p>-->
+        </div>
+        <div><a type="btn" href="{% url  'service' id=service.id %}" style="color: white; background: pink; padding: 20px 20px; font-weight: 900;">BUY TICKETS</a></div>
+        {% endfor %}
+        <div class="caption" style="display: none;">Selecciona una ciudad para ver las clases.</div>
+    </div>
+    
+</section>
+
+<div class="pink-section" style="background-color: pink; text-align: center; padding: 40px; box-sizing: border-box;">
+    <h2 style="margin: 20px auto; max-width: 500px; font-weight: 600; color: white;">Hire a Private Chef</h2>
+    <p style="margin: 0 auto; max-width: 500px; color: white;">
+        Are you on the lookout for a one-of-a-kind way to share some holiday joy with your loved ones? Search no more! For a short span of ten days, you can book a private class in your home at an incredibly affordable price. Book fast; this is going to sell out quickly.
+    </p>
+    <p class="promo-text" style="margin: 20px auto; color: white;">Special promo valid for classes booked through January 5th, 2024. Los Angeles and Orange County only.</p>
+
+    <div style="background-color: white; margin: auto; width: 70%; padding: 20px; box-sizing: border-box;">
+        <div class="white-section" style="display: flex; max-height: 400px;">
+            <img src="https://static.wixstatic.com/media/9ab2ad_167984344bd84240b1e7334147ffb71c~mv2.jpg/v1/fill/w_469,h_320,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/9ab2ad_167984344bd84240b1e7334147ffb71c~mv2.jpg" alt="Cooking Class Image" style="width: 50%; object-fit: cover;">
+            <div style="margin: auto; display: flex; flex-direction: column; padding: 20px;">
+                <h4 style="font-size: 25px; margin-bottom: 10px;">Private Cooking Class -<br> Holiday Special</h4>
+                <p>2 hr</p>
+                <p>from $600</p>
+                <a href="{% url 'calendar_show' %}" style="padding: 10px; width: 100%;"><button style="color: white; background: pink; border: 1px solid pink; font-size: 14px; padding: 10px;">Book Now</button></a>
+            </div>
         </div>
     </div>
 </div>
-</section>
-  <div class="content container-fluid">
-    {% if messages %}
-    {% for message in messages %}
-            <div class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert">{{ message }}</div>
-    {% endfor %}
-{% endif %}
-    
- 
-    
-<div class="container">
-  <div class="split">
-      <div class="half">
-          <img src="https://via.placeholder.com/600x400" alt="CDMX">
-          <div class="text-overlay">
-              <h2>CDMX</h2>
-          </div>
-      </div>
-      <div class="half">
-          <img src="https://via.placeholder.com/600x400" alt="Worldwide">
-          <div class="text-overlay">
-              <h2>Worldwide</h2>
-          </div>
-      </div>
-  </div>
-
-</div>
-       
-
-<div class="card-container" style="display: flex; flex-direction: column; width: 120px; margin: 0px 150px; height: 500px">
-  {% for service in services %}
-      <div class="card"style="border: 1px black solid">
-          <!-- Service Image -->
-          <img style="width:300px ; height: 250px; object-fit: cover;" src="{{ service.picture.url }}" alt="{{ service.name }} Image">
-
-          <div class="overlay" style="margin-top: 10px;">
-            <p class="card-title" style="font-weight: bold; font-size: 20px;">{{ service.name }}</p>
-
-              <!-- Service Location -->
-              <p>{{ service.location }}</p>
-              
-               <!-- Service Description -->
-               <p class="card-text">{{ service.description }}</p>
-
-               <!-- Service Price 
-               <p class="card-text"><strong>Price:</strong> ${{ service.price }}</p>-->
-          </div>
-          <div><a type="btn" href="{% url  'service' id=service.id %}" style="color: white; background: pink; padding: 20px 20px; font-weight: 900;">BUY TICKETS</a></div>
-          {% endfor %}
-          <div class="caption" style="display: none;">Selecciona una ciudad para ver las clases.</div>
-       
-      </div>
-     
-</div>
-      
-
-       
-
-    </section>
-    
-       
-
-   
-  </div>
- 
-  
-
-</section>
-<div class="pink-section" style="background-color: pink; text-align: center; padding: 40px; box-sizing: border-box;">
-  <h2 style="margin: 20px auto; max-width: 500px; font-weight: 600; color: white;">Hire a Private Chef</h2>
-  <p style="margin: 0 auto; max-width: 500px; color: white;" >
-    Are you on the lookout for a one-of-a-kind way to share some holiday joy with your loved ones?Search no more! For a short span of ten days, you can book a private class in your home at an incredibly affordable price. Book fast; this is going to sell out quickly.
-  </p>
-  <p class="promo-text" style="margin: 20px auto; color: white;">Special promo valid for classes booked through January 5th, 2024. Los Angeles and Orange County only.</p>
-
-  <div style="background-color: white; margin: auto; width: 70%; padding: 20px; box-sizing: border-box;">
-    <div class="white-section" style="display: flex; max-height: 400px;">
-      <img src="https://static.wixstatic.com/media/9ab2ad_167984344bd84240b1e7334147ffb71c~mv2.jpg/v1/fill/w_469,h_320,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/9ab2ad_167984344bd84240b1e7334147ffb71c~mv2.jpg" alt="Cooking Class Image" style="width: 50%; object-fit: cover;">
-      <div style="margin: auto; display: flex; flex-direction: column; padding: 20px;">
-        <h4 style="font-size: 25px; margin-bottom: 10px;">Private Cooking Class -<br> Holiday Special</h4>
-        <p>2 hr</p>
-        <p>from $600</p>
-        <a href="{% url 'calendar_show' %}" style="padding: 10px; width: 100%;"><button style="color: white; background: pink; border: 1px solid pink; font-size: 14px; padding: 10px;">Book Now</button></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 <div style="display: flex; background-color: #f5f5f5; padding: 20px;">
 
-  <img src="https://static.wixstatic.com/media/b8cbe3_fd6d4833d3034ed1a26d6e962b7112a0~mv2.jpg/v1/fill/w_809,h_627,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/b8cbe3_fd6d4833d3034ed1a26d6e962b7112a0~mv2.jpg" alt="Cooking Class Image" style="width: 50%; object-fit: cover;">
+    <img src="https://static.wixstatic.com/media/b8cbe3_fd6d4833d3034ed1a26d6e962b7112a0~mv2.jpg/v1/fill/w_809,h_627,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/b8cbe3_fd6d4833d3034ed1a26d6e962b7112a0~mv2.jpg" alt="Cooking Class Image" style="width: 50%; object-fit: cover;">
 
-  <div style="margin: auto; text-align: left; padding: 20px;">
-    <h4>Team Building & Private Classes</h4>
+    <div style="margin: auto; text-align: left; padding: 20px;">
+        <h4>Team Building & Private Classes</h4>
 
-    <p style="width: 70%;">
-      Private cooking classes and corporate team building experiences are fully customizable. Ingredients kits available upon request. Whether it's a birthday celebration, a couple dinner, father's day, or simply miss your friends, let us set up a private cooking class with you with any chef around the world.
-    </p>
+        <p style="width: 70%;">
+            Private cooking classes and corporate team building experiences are fully customizable. Ingredients kits available upon request. Whether it's a birthday celebration, a couple dinner, father's day, or simply miss your friends, let us set up a private cooking class with you with any chef around the world.
+        </p>
 
-    <a href=""><button style="color: white; background-color: black; border: 1px solid black; font-size: 14px; padding: 10px; font-weight: 600;">Click Me</button></a>
-  </div>
+        <a href=""><button style="color: white; background-color: black; border: 1px solid black; font-size: 14px; padding: 10px; font-weight: 600;">Click Me</button></a>
+    </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const cdmxButton = document.getElementById("cdmx");
+      const worldwideButton = document.getElementById("worldwide");
+      const cardContainer = document.querySelector(".content.container-fluid");
+      const caption = document.querySelector(".caption");
 
-
-  {%endblock%}
-
-
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script>
-      $(document).ready(function () {
-          // Ocultar todas las clases y la caption al principio
-          $('.card, .caption').hide();
-  
-          // Mostrar las clases de la primera ciudad por defecto
-          var defaultCity = 'los_angeles';
-          $('.card.' + defaultCity).show();
-  
-          // Activar el primer enlace por defecto
-          $('.public_city[data-city="' + defaultCity + '"]').addClass('active');
-  
-          // Manejar clic en enlaces de la ciudad
-          $('.public_city').click(function (e) {
-              e.preventDefault();
-  
-              // Ocultar todas las clases y la caption
-              $('.card, .caption').hide();
-  
-              // Obtener el valor del atributo data-city
-              var city = $(this).data('city');
-  
-              // Mostrar las clases de la ciudad seleccionada o la caption si no hay ninguna ciudad seleccionada
-              if ($('.card.' + city).length > 0) {
-                  $('.card.' + city).show();
-              } else {
-                  $('.caption').show();
-              }
-  
-              // Agregar clase 'active' al enlace de la ciudad seleccionada y quitarla de los demás
-              $('.public_city').removeClass('active');
-              $(this).addClass('active');
+      // Función para mostrar las clases offline
+      function showOfflineClasses() {
+          const offlineClasses = document.querySelectorAll(".offline");
+          const onlineClasses = document.querySelectorAll(".online");
+          offlineClasses.forEach(function(card) {
+              card.style.display = "flex";
           });
-      });
-  </script>
+          onlineClasses.forEach(function(card) {
+              card.style.display = "none";
+          });
+          caption.style.display = "none";
+      }
+
+      // Función para mostrar las clases online
+      function showOnlineClasses() {
+          const offlineClasses = document.querySelectorAll(".offline");
+          const onlineClasses = document.querySelectorAll(".online");
+          offlineClasses.forEach(function(card) {
+              card.style.display = "none";
+          });
+          onlineClasses.forEach(function(card) {
+              card.style.display = "flex";
+          });
+          caption.style.display = "none";
+      }
+
+      // Agregar event listeners a los botones dependiendo del tipo de espacio
+      cdmxButton.addEventListener("click", showOfflineClasses);
+      worldwideButton.addEventListener("click", showOnlineClasses);
+
+      // Mostrar clases offline por defecto al cargar la página
+      showOfflineClasses();
+  });
+</script>
+
+
+{% endblock %}
